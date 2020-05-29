@@ -1,4 +1,4 @@
-package com.example.somegoodnews
+package com.example.somegoodnews.Managers
 
 data class NewsArticle (
     val category: String = "",
