@@ -20,7 +20,9 @@ class ArticlesAdapter(allArticles: HashMap<String, NewsArticle>): RecyclerView.A
 
     override fun onBindViewHolder(holder: ArticleViewHolder, position: Int) {
         val currArticle = allArticles[position]
-        holder.bind(currArticle)
+        if (currArticle != null) {
+            holder.bind(currArticle)
+        }
     }
 
     inner class ArticleViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
