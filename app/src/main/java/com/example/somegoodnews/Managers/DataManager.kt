@@ -11,7 +11,9 @@ class DataManager {
         private const val TAG = "fuck"
     }
     private lateinit var database:FirebaseDatabase
-    var articles: HashMap<String, NewsArticle> = hashMapOf()
+    var articles: MutableList<NewsArticle> = mutableListOf()
+    var articlesMap: HashMap<String, NewsArticle> = hashMapOf()
+    var onUpdateListListener: OnUpdateListListener? = null
 
     fun fetchData() {
         database = Firebase.database
@@ -24,9 +26,15 @@ class DataManager {
                 // whenever data at this location is updated.
                 val value = dataSnapshot.getValue<HashMap<String, NewsArticle>>()
                 value?.let{
-                    articles = value
+                    articlesMap = value
                 }
-                Log.i(TAG, "Value is: $articles")
+                articlesMap.forEach {
+                    articles.add(it.value)
+                }
+                onUpdateListListener?.onUpdateList()
+                // Testing
+                val numArticles = articles.size
+                Log.i(TAG, "Fetched $numArticles articles")
             }
 
             override fun onCancelled(error: DatabaseError) {

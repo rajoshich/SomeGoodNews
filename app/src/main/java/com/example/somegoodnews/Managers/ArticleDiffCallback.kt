@@ -3,7 +3,6 @@ package com.example.somegoodnews.Managers
 import androidx.recyclerview.widget.DiffUtil
 
 class ArticleDiffCallback (
-    // Change these to hashmap?
     private val old: List<NewsArticle>,
     private val new: List<NewsArticle>
     ): DiffUtil.Callback() {
