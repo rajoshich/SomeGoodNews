@@ -1,0 +1,55 @@
+{
+  "articles" : {
+    "1" : {
+      "category" : "Humans being bros ",
+      "content" : "My daughter has been a nanny for this amazing kid for over a year. When he realized she wouldn’t have a senior prom, he wanted to throw her one. He planned a socially distant prom, complete with dancing & her favorite foods.",
+      "date" : "May 27, 2020",
+      "headline" : "Best Prom Ever",
+      "img" : "https://pbs.twimg.com/media/EY-wMV1WkAY7Wsi?format=jpg&name=large",
+      "source" : "@bhchapman"
+    },
+    "2" : {
+      "category" : "Humans being bros ",
+      "content" : "Everest HS football players spent the whole day helping families devastated by the flooding in the Midland MI area.  Many grateful people!  There is still much to be done but there were smiles today!  Thanks Coach P!!!",
+      "date" : "May 25, 2020",
+      "headline" : "HS football players help families devastated by flood",
+      "img" : "https://pbs.twimg.com/media/EY3aNNpXkAA1yV8?format=jpg&name=large",
+      "source" : "@kwillertz"
+    },
+    "3" : {
+      "category" : "Humans being bros ",
+      "content" : "Our #SomeGoodNews of the day is my caring daughter Isabelle donated 10 inches to @CWHL_org for kids with cancer! So proud of her!",
+      "date" : "May 17, 2020",
+      "headline" : "Daughter donates hair to cancer patients",
+      "img" : "https://pbs.twimg.com/media/EYPQFBpWAAMGIgT?format=jpg&name=large",
+      "source" : "@ajsmith1983"
+    },
+    "4" : {
+      "category" : "Humans being bros ",
+      "content" : "After 10 whole weeks, my Grandma (who moved to a new, unfamiliar care home and isn’t allowed visitors) has finally learned how to FaceTime.",
+      "date" : "May 30, 2020",
+      "headline" : "Grandma learns how to FaceTime family from care home",
+      "img" : "https://pbs.twimg.com/media/EZN87o_WAAI5Dcq?format=jpg&name=large",
+      "source" : "@ktvncnt"
+    },
+    "5" : {
+      "category" : "Humans being bros",
+      "content" : "Kivi was born 2 days ago. Her name means “protected” in Hebrew. Pretty sure we found the protector.",
+      "date" : "May 16, 2020",
+      "headline" : "Kivi finds protector",
+      "img" : "https://pbs.twimg.com/media/EYMC-TbUcAE722x?format=jpg&name=large",
+      "source" : "@hillhands"
+    }
+  },
+  "test" : "djfhsdkhfk",
+  "users" : {
+    "coolBro" : {
+      "liked articles" : ["1" , "5"],
+      "news articles" : ["2", "3", "4" ]
+    },
+    "wholesomeLlama" : {
+      "liked articles" : ["1"],
+      "news articles" : ["5"]
+    }
+  }
+}

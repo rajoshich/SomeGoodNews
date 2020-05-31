@@ -37,9 +37,13 @@ class ArticlesAdapter(allArticles: List<NewsArticle>): RecyclerView.Adapter<Arti
     }
 
     inner class ArticleViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
-        private val tvNewsHeading by lazy {itemView.findViewById<TextView>(R.id.tvNewsHeading)}
+        private val tvNewsHeading by lazy {itemView.findViewById<TextView>(R.id.tvArticleHeadline)}
+        private val tvNewsCategory by lazy {itemView.findViewById<TextView>(R.id.tvArticleCategory)}
+        private val tvNewsSource by lazy {itemView.findViewById<TextView>(R.id.tvArticleSource)}
         fun bind(article: NewsArticle) {
             tvNewsHeading.text = article.headline
+            tvNewsCategory.text = article.category
+            tvNewsSource.text = article.source
             itemView.setOnClickListener {
                 onArticleClickListener?.invoke(article)
             }

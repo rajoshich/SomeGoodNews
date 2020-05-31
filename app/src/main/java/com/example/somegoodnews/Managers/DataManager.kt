@@ -12,7 +12,7 @@ class DataManager {
     }
     private lateinit var database:FirebaseDatabase
     var articles: MutableList<NewsArticle> = mutableListOf()
-    var articlesMap: HashMap<String, NewsArticle> = hashMapOf()
+//    var articlesMap: HashMap<String, NewsArticle> = hashMapOf()
     var onUpdateListListener: OnUpdateListListener? = null
 
     fun fetchData() {
@@ -24,12 +24,11 @@ class DataManager {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
-                val value = dataSnapshot.getValue<HashMap<String, NewsArticle>>()
-                value?.let{
-                    articlesMap = value
-                }
-                articlesMap.forEach {
-                    articles.add(it.value)
+                val value = dataSnapshot.getValue<ArrayList<NewsArticle>>()
+                value?.let {
+                    // Drop 1st cause it's always null for some reason
+                    articles = value.drop(1).toMutableList()
+                    Log.i("fuck", articles.toString())
                 }
                 onUpdateListListener?.onUpdateList()
                 // Testing

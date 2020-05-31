@@ -1,55 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:padding="16dp"
-    android:background="?selectableItemBackground">
+    android:padding="12dp"
+    android:foreground="?selectableItemBackground">
+
     <ImageView
-        android:id="@+id/ivNewsImg"
-        android:layout_width="0dp"
+        android:id="@+id/ivArticleImage"
+        android:layout_width="150dp"
         android:layout_height="120dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@id/tvNewsHeading"
-        android:layout_weight="1"
-        android:outlineAmbientShadowColor="@color/black"
         android:src="@drawable/stock_photo"
-        android:contentDescription="Some stock photo"
+        app:layout_constraintLeft_toLeftOf="parent"
+        tools:ignore="MissingConstraints"
+        android:elevation="20dp" />
+
+    <TextView
+        android:id="@+id/tvArticleHeadline"
+        android:layout_width="210dp"
+        android:layout_height="wrap_content"
+        tools:text="Some Headline that is long very very long"
+        app:layout_constraintLeft_toRightOf="@id/ivArticleImage"
+        android:layout_marginLeft="16dp"
+        android:textSize="20sp"
+        android:fontFamily="sans-serif"
+        android:textColor="@color/maxEmphGrey"
+        android:breakStrategy="balanced"
         />
     <TextView
-        android:id="@+id/tvNewsHeading"
+        android:id="@+id/tvArticleSource"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintLeft_toRightOf="@id/ivNewsImg"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginStart="16dp"
-        tools:text="Some heading"
-        android:textSize="30sp"
-        android:layout_weight="1"
-        android:ellipsize="none"
-        android:maxLines="100"
-        android:scrollHorizontally="false"
-    />
+        tools:text="Source"
+        app:layout_constraintLeft_toRightOf="@id/ivArticleImage"
+        app:layout_constraintTop_toBottomOf="@id/tvArticleHeadline"
+        android:layout_marginLeft="16dp"
+        android:textSize="18sp"
+        android:textColor="@color/lowEmphGrey"
+        />
     <TextView
-        android:id="@+id/tvNewsSource"
+        android:id="@+id/tvArticleCategory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/tvNewsHeading"
-        app:layout_constraintLeft_toRightOf="@id/ivNewsImg"
-        app:layout_constraintBottom_toBottomOf="@id/ivNewsImg"
-        android:layout_marginStart="16dp"
-        tools:text="Source name"
-    />
-    <ImageButton
-        android:id="@+id/ibLikeNews"
+        tools:text="Category"
+        app:layout_constraintLeft_toRightOf="@id/ivArticleImage"
+        app:layout_constraintTop_toBottomOf="@id/tvArticleSource"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:textSize="18sp"
+        android:textColor="@color/lowEmphGrey"
+        />
+
+ <!--   <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_star_black"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvNewsHeading"
-        app:layout_constraintBottom_toBottomOf="@id/ivNewsImg"
         android:background="@color/white"
-        android:contentDescription="save news article button"
-        />
+        android:src="@drawable/ic_star_black"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="15dp"
+        app:layout_constraintBottom_toBottomOf="@id/ivArticleImage"
+        app:layout_constraintRight_toRightOf="parent"/>-->
+
 </androidx.constraintlayout.widget.ConstraintLayout>
