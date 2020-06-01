@@ -1,30 +1,32 @@
 package com.example.somegoodnews.Fragments
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.somegoodnews.Managers.ArticlesAdapter
+import com.example.somegoodnews.Listeners.OnUpdateListListener
 import com.example.somegoodnews.R
 import com.example.somegoodnews.SGNApp
 import kotlinx.android.synthetic.main.news_list.*
 
 class NewsListFragment: Fragment() {
-    companion object {
-        val TAG: String = NewsListFragment::class.java.simpleName
-        fun getInstance() : NewsListFragment {
-            return NewsListFragment()
-        }
-
-    }
     private lateinit var articlesAdapter: ArticlesAdapter
     lateinit var app: SGNApp
+    private var onUpdateListListener: OnUpdateListListener? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         app = (context?.applicationContext as SGNApp)
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if(context is OnUpdateListListener) {
+            onUpdateListListener = context
+        }
     }
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,7 +50,8 @@ class NewsListFragment: Fragment() {
         Log.i("fuck", "From fragment: $articles")
     }
 
-    fun updateList() {
+
+    fun onUpdateList() {
         val articles = app.dataManager.articles
         articlesAdapter.change(articles)
 

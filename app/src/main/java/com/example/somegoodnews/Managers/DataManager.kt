@@ -1,6 +1,7 @@
 package com.example.somegoodnews.Managers
 
 import android.util.Log
+import com.example.somegoodnews.Listeners.OnUpdateListListener
 import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
@@ -30,7 +31,7 @@ class DataManager {
                     articles = value.drop(1).toMutableList()
                     Log.i("fuck", articles.toString())
                 }
-//                onUpdateListListener?.onUpdateList()
+                onUpdateListListener?.onUpdateList()
                 // Testing
                 val numArticles = articles.size
                 Log.i(TAG, "Fetched $numArticles articles")

@@ -1,18 +1,21 @@
 package com.example.somegoodnews
 
 import CustomPageAdapter
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.fragment.app.FragmentTransaction
+import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import com.example.somegoodnews.Fragments.CategoryFragment
 import com.example.somegoodnews.Fragments.NewsListFragment
 import com.example.somegoodnews.Managers.NewsArticle
-import com.example.somegoodnews.Managers.OnArticleClickListener
-import com.example.somegoodnews.Managers.OnUpdateListListener
+import com.example.somegoodnews.Listeners.OnArticleClickListener
+import com.example.somegoodnews.Listeners.OnUpdateListListener
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.tab_layout.*
 
-class MainActivity : AppCompatActivity(), OnUpdateListListener, OnArticleClickListener {
+
+class MainActivity : AppCompatActivity(),
+    OnUpdateListListener,
+    OnArticleClickListener {
 
     lateinit var pageAdapter: CustomPageAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,18 +31,14 @@ class MainActivity : AppCompatActivity(), OnUpdateListListener, OnArticleClickLi
         pageAdapter.addFragments(CategoryFragment(), "Categories")
         viewPager.adapter = pageAdapter
         tabLayout.setupWithViewPager(viewPager)
-
-        // Add news list fragment
-//        supportFragmentManager
-//            .beginTransaction()
-//            .add(R.id.mainActivity, NewsListFragment.getInstance(), NewsListFragment.TAG)
-//            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-//            .commit()
     }
 
     override fun onUpdateList() {
-        val newsListFragment = supportFragmentManager.findFragmentByTag(NewsListFragment.TAG) as NewsListFragment
-        newsListFragment.updateList()
+        // Gets the newsListFragment from the viewpager since there is no TAG
+        val newsListFragment = pageAdapter.instantiateItem(viewPager, viewPager.currentItem) as NewsListFragment
+        newsListFragment.onUpdateList()
+
+        Log.i("fuck", "Main update list called")
     }
 
     override fun onArticleClicked(newsArticle: NewsArticle) {

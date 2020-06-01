@@ -6,9 +6,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clickable="true"
-    android:focusable="true">
-  <include layout="@layout/tab_layout"
-      android:id="@+id/toolbarCopy"/>
+    android:focusable="true"
+    tools:context=".MainActivity">
+    <include layout="@layout/tab_layout"
+        android:id="@+id/toolbarCopy"/>
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
