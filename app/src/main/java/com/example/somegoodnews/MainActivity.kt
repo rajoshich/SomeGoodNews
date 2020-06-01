@@ -1,6 +1,6 @@
 package com.example.somegoodnews
 
-import CustomPageAdapter
+import TabsAdapter
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity(),
     OnUpdateListListener,
     OnArticleClickListener {
 
-    lateinit var pageAdapter: CustomPageAdapter
+    lateinit var pageAdapter: TabsAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity(),
 
         // Stuff to setup tab layout thing
         setSupportActionBar(toolbarMain)
-        pageAdapter = CustomPageAdapter(supportFragmentManager)
+        pageAdapter = TabsAdapter(supportFragmentManager)
         // Add all the fragments needed for tab layout
         pageAdapter.addFragments(NewsListFragment(), "All Articles")
         pageAdapter.addFragments(CategoryFragment(), "Categories")

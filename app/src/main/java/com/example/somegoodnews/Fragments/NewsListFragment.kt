@@ -11,7 +11,7 @@ import com.example.somegoodnews.Managers.ArticlesAdapter
 import com.example.somegoodnews.Listeners.OnUpdateListListener
 import com.example.somegoodnews.R
 import com.example.somegoodnews.SGNApp
-import kotlinx.android.synthetic.main.news_list.*
+import kotlinx.android.synthetic.main.newslist_fragment.*
 
 class NewsListFragment: Fragment() {
     private lateinit var articlesAdapter: ArticlesAdapter
@@ -33,7 +33,7 @@ class NewsListFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return layoutInflater.inflate(R.layout.news_list, container, false)
+        return layoutInflater.inflate(R.layout.newslist_fragment, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
