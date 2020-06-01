@@ -30,7 +30,7 @@ class DataManager {
                     articles = value.drop(1).toMutableList()
                     Log.i("fuck", articles.toString())
                 }
-                onUpdateListListener?.onUpdateList()
+//                onUpdateListListener?.onUpdateList()
                 // Testing
                 val numArticles = articles.size
                 Log.i(TAG, "Fetched $numArticles articles")
