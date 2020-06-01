@@ -1,9 +1,8 @@
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 
-class CustomPageAdapter(fm: FragmentManager): FragmentPagerAdapter(fm) {
+class TabsAdapter(fm: FragmentManager): FragmentPagerAdapter(fm) {
     var fragmentItems:ArrayList<Fragment> = ArrayList()
     var fragmentTitles:ArrayList<String> = ArrayList()
 
