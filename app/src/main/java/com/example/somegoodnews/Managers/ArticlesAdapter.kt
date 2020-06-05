@@ -47,7 +47,9 @@ class ArticlesAdapter(allArticles: List<NewsArticle>): RecyclerView.Adapter<Arti
             tvNewsHeading.text = article.headline
             tvNewsCategory.text = article.category
             tvNewsSource.text = article.source
-            Picasso.get().load(article.img).into(ivArticleImage)
+            if(!article.img.isNullOrEmpty()) {
+                Picasso.get().load(article.img).into(ivArticleImage)
+            }
             itemView.setOnClickListener {
                 onArticleClickListener?.invoke(article)
             }
