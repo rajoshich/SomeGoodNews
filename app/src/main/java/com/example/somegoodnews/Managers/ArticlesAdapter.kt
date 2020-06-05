@@ -4,10 +4,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.somegoodnews.R
+import com.squareup.picasso.Picasso
 
 class ArticlesAdapter(allArticles: List<NewsArticle>): RecyclerView.Adapter<ArticlesAdapter.ArticleViewHolder>() {
     private var allArticles: List<NewsArticle> = allArticles.toList()
@@ -40,10 +42,12 @@ class ArticlesAdapter(allArticles: List<NewsArticle>): RecyclerView.Adapter<Arti
         private val tvNewsHeading by lazy {itemView.findViewById<TextView>(R.id.tvArticleHeadline)}
         private val tvNewsCategory by lazy {itemView.findViewById<TextView>(R.id.tvArticleCategory)}
         private val tvNewsSource by lazy {itemView.findViewById<TextView>(R.id.tvArticleSource)}
+        private val ivArticleImage by lazy {itemView.findViewById<ImageView>(R.id.ivArticleImage)}
         fun bind(article: NewsArticle) {
             tvNewsHeading.text = article.headline
             tvNewsCategory.text = article.category
             tvNewsSource.text = article.source
+            Picasso.get().load(article.img).into(ivArticleImage)
             itemView.setOnClickListener {
                 onArticleClickListener?.invoke(article)
             }
