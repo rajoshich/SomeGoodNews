@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.somegoodnews.Managers.ArticlesAdapter
 import com.example.somegoodnews.Listeners.OnUpdateListListener
+import com.example.somegoodnews.Managers.NewsArticle
 import com.example.somegoodnews.R
 import com.example.somegoodnews.SGNApp
 import kotlinx.android.synthetic.main.newslist_fragment.*
@@ -45,6 +46,10 @@ class NewsListFragment: Fragment() {
         articlesAdapter.onArticleClickListener = {
             // add new fragment??
             app.lastArticle = it
+        }
+
+        articlesAdapter.onArticleLongClickListener = { newsArticle: NewsArticle, i: Int ->
+            app.likeArticle(newsArticle, i)
         }
         // Testing
         Log.i("fuck", "From fragment: $articles")

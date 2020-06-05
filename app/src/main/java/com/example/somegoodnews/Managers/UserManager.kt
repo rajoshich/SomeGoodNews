@@ -13,6 +13,8 @@ import com.firebase.ui.auth.data.model.User
 import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.sign_in_fragment.*
 
 class UserManager: Fragment() {
@@ -148,6 +150,17 @@ class UserManager: Fragment() {
             emailPasswordButtons.visibility = View.VISIBLE
             emailPasswordFields.visibility = View.VISIBLE
             signedInButtons.visibility = View.GONE
+        }
+    }
+
+    fun addLikedArticle(pos:Int) {
+        if(currentUser == null) {
+            Log.i("fuck", "Cannot like article")
+        } else {
+            currentUser?.email?.let {
+                Firebase.database.getReference("users").child(it)
+                    .child("likedArticles").setValue(pos)
+            }
         }
     }
 }

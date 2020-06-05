@@ -16,4 +16,10 @@ class SGNApp: Application() {
 
         userManager = UserManager()
     }
+
+    // Doesn't work because UserManager was used to log in and stuff
+    // In another activity: UserActivity?
+    fun likeArticle(article: NewsArticle, pos: Int) {
+        userManager.addLikedArticle(pos)
+    }
 }

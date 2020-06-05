@@ -14,6 +14,7 @@ import com.squareup.picasso.Picasso
 class ArticlesAdapter(allArticles: List<NewsArticle>): RecyclerView.Adapter<ArticlesAdapter.ArticleViewHolder>() {
     private var allArticles: List<NewsArticle> = allArticles.toList()
     var onArticleClickListener: ((article: NewsArticle) -> Unit)? = null
+    var onArticleLongClickListener: ((article: NewsArticle, position: Int) -> Unit)? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_article, parent, false)
         return ArticleViewHolder(view)
@@ -35,7 +36,7 @@ class ArticlesAdapter(allArticles: List<NewsArticle>): RecyclerView.Adapter<Arti
 
     override fun onBindViewHolder(holder: ArticleViewHolder, position: Int) {
         val currArticle = allArticles[position]
-        holder.bind(currArticle)
+        holder.bind(currArticle, position)
     }
 
     inner class ArticleViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
@@ -43,7 +44,7 @@ class ArticlesAdapter(allArticles: List<NewsArticle>): RecyclerView.Adapter<Arti
         private val tvNewsCategory by lazy {itemView.findViewById<TextView>(R.id.tvArticleCategory)}
         private val tvNewsSource by lazy {itemView.findViewById<TextView>(R.id.tvArticleSource)}
         private val ivArticleImage by lazy {itemView.findViewById<ImageView>(R.id.ivArticleImage)}
-        fun bind(article: NewsArticle) {
+        fun bind(article: NewsArticle, position: Int) {
             tvNewsHeading.text = article.headline
             tvNewsCategory.text = article.category
             tvNewsSource.text = article.source
@@ -52,6 +53,10 @@ class ArticlesAdapter(allArticles: List<NewsArticle>): RecyclerView.Adapter<Arti
             }
             itemView.setOnClickListener {
                 onArticleClickListener?.invoke(article)
+            }
+            itemView.setOnLongClickListener {
+                onArticleLongClickListener?.invoke(article, position)
+                true
             }
         }
 
