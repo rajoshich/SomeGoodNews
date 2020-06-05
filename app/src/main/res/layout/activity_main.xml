@@ -23,4 +23,5 @@
             app:tabTextColor="@color/white"/>
     </androidx.viewpager.widget.ViewPager>
 
+
 </RelativeLayout>
