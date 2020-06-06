@@ -8,4 +8,11 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="signed_out">Signed Out</string>
+    <string name="fake_content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam et vestibulum justo.
+        Proin lacinia feugiat ante in aliquet. Aenean neque ipsum, vestibulum quis diam eget, semper pellentesque odio.
+        Mauris pulvinar, orci in sagittis tincidunt, massa augue dignissim purus, eu porttitor magna velit quis dolor.
+        Nam porttitor massa ut convallis imperdiet. Phasellus ullamcorper metus enim. Aliquam posuere ante nec odio posuere,
+        in placerat risus semper.Nulla ultrices ornare metus, vel vulputate augue auctor vel. Sed dignissim dignissim rutrum.
+        Morbi magna ex, rutrum et dolor a, gravida accumsan augue. tur.
+    </string>
 </resources>
