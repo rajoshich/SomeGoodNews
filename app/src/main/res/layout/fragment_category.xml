@@ -3,15 +3,83 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragments.CategoryFragment">
-    <TextView
+
+    <!--   <LinearLayout-->
+    <!--       android:id="@+id/category1"-->
+    <!--       android:layout_width="match_parent"-->
+    <!--       android:layout_height="200dp">-->
+    <!--       -->
+    <!--       <ImageView-->
+    <!--           android:layout_width="0dp"-->
+    <!--           android:layout_height="fill_parent"-->
+    <!--           android:layout_weight="1"-->
+    <!--           android:src="@color/design_default_color_primary_variant"/>-->
+    <!--       <ImageView-->
+    <!--           android:layout_width="0dp"-->
+    <!--           android:layout_height="fill_parent"-->
+    <!--           android:layout_weight="1"-->
+    <!--           android:src="@color/design_default_color_primary"/>-->
+    <!--   </LinearLayout>-->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="SOME OTHER FRAGMENT" />
-    <Button
-        android:id="@+id/testSignIn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="USER"/>
+        android:layout_margin="16dp">
+        <TextView
+            android:id="@+id/categoryTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toRightOf="parent"
+            app:layout_constraintRight_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="Categories"
+            android:textSize="20sp"/>
+
+        <GridLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:columnCount="2"
+            android:rowCount="2"
+            app:layout_constraintLeft_toRightOf="parent"
+            app:layout_constraintRight_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/categoryTitle">
+
+            <TextView
+                android:id="@+id/category1"
+                android:layout_width="160dp"
+                android:layout_height="200dp"
+                android:layout_margin="10dp"
+                android:text="Humans being bros"
+                android:gravity="bottom|center"
+                android:background="@color/cardview_shadow_start_color"/>
+            <TextView
+                android:id="@+id/category2"
+                android:layout_width="160dp"
+                android:layout_height="200dp"
+                android:layout_margin="10dp"
+                android:text="Aww"
+                android:gravity="bottom|center"
+                android:background="@color/colorPrimary"/>
+            <TextView
+                android:id="@+id/category3"
+                android:layout_width="160dp"
+                android:layout_height="200dp"
+                android:layout_margin="10dp"
+                android:text="Covid-19"
+                android:gravity="bottom|center"
+                android:background="@color/colorPrimary"/>
+            <TextView
+                android:id="@+id/category4"
+                android:layout_width="160dp"
+                android:layout_height="200dp"
+                android:layout_margin="10dp"
+                android:text="Other"
+                android:gravity="bottom|center"
+                android:background="@color/cardview_shadow_start_color"/>
+
+        </GridLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>
