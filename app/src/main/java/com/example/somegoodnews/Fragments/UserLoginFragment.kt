@@ -1,4 +1,4 @@
-package com.example.somegoodnews.Managers
+package com.example.somegoodnews.Fragments
 
 import android.os.Bundle
 import android.text.TextUtils
@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.somegoodnews.R
-import com.firebase.ui.auth.data.model.User
+import com.example.somegoodnews.SGNApp
 import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -17,19 +17,19 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.sign_in_fragment.*
 
-class UserManager: Fragment() {
+class UserLoginFragment: Fragment() {
     private lateinit var auth: FirebaseAuth
-    private var currentUser: FirebaseUser? = null
+    var currentUser: FirebaseUser? = null
     companion object {
-        fun getInstance(): UserManager {
-            return UserManager()
+        fun getInstance(): UserLoginFragment {
+            return UserLoginFragment()
         }
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         auth = FirebaseAuth(FirebaseApp.getInstance())
-        currentUser = auth.currentUser
-
+        updateUser(auth.currentUser)
+        Log.i("fuck", currentUser.toString())
     }
 
     override fun onCreateView(
@@ -67,7 +67,7 @@ class UserManager: Fragment() {
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
                     Log.i("fuck", "signInWithEmail:success")
-                    currentUser = auth.currentUser
+                    updateUser(auth.currentUser)
                     updateUI(currentUser)
                 } else {
                     // If sign in fails, display a message to the user.
@@ -107,7 +107,7 @@ class UserManager: Fragment() {
 
     private fun signOut() {
         auth.signOut()
-        currentUser = null
+        updateUser(null)
         updateUI(currentUser)
     }
 
@@ -162,5 +162,10 @@ class UserManager: Fragment() {
                     .child("likedArticles").setValue(pos)
             }
         }
+    }
+    private fun updateUser(newUser: FirebaseUser?) {
+        currentUser = newUser
+        (context?.applicationContext as SGNApp).currentUser = newUser
+        Log.i("fuck", "new user: " + currentUser.toString())
     }
 }

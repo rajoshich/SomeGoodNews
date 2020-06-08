@@ -7,8 +7,7 @@
     android:layout_height="match_parent"
     android:clickable="true"
     android:focusable="true"
-    tools:context=".MainActivity"
-    android:id="@+id/fragmentContainer">
+    tools:context=".MainActivity">
     <include layout="@layout/tab_layout"
         android:id="@+id/toolbarCopy"/>
     <androidx.viewpager.widget.ViewPager
@@ -23,7 +22,12 @@
             android:background="@color/colorPrimary"
             app:tabTextColor="@color/white"/>
     </androidx.viewpager.widget.ViewPager>
-
+    <FrameLayout
+        android:id="@+id/fragmentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbarCopy"
+    />
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigation"
         app:menu="@menu/bottom_nav_menu"

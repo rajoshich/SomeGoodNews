@@ -1,13 +1,15 @@
 package com.example.somegoodnews
 
 import TabsAdapter
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.somegoodnews.Fragments.CategoryFragment
 import com.example.somegoodnews.Fragments.NewsListFragment
+import com.example.somegoodnews.Fragments.UserLoginFragment
 import com.example.somegoodnews.Managers.NewsArticle
 import com.example.somegoodnews.Listeners.OnArticleClickListener
 import com.example.somegoodnews.Listeners.OnUpdateListListener
@@ -25,17 +27,30 @@ class MainActivity : AppCompatActivity(),
             R.id.home -> {
                 item.setIcon(R.drawable.news_selected)
                 Log.i("yes", "testing home")
-                replaceFragment(NewsListFragment())
+                /*replaceFragment(NewsListFragment())*/
+                fragmentContainer.visibility = GONE
                 return@OnNavigationItemSelectedListener true
             }
             R.id.submit -> {
-                Log.i("yes", "testing submit")
-                replaceFragment(NewsListFragment())
+                var currentUser = (applicationContext as SGNApp).currentUser
+                Log.i("yes", "main: " + currentUser.toString())
+                if(currentUser == null) {
+                    replaceFragment(UserLoginFragment())
+                } else {
+                    // create submit fragment
+                    Log.i("yes", "testing submit")
+                }
                 return@OnNavigationItemSelectedListener true
             }
             R.id.liked -> {
-                Log.i("yes", "testing liked")
-                //replaceFragment(NewsListFragment())
+                var currentUser = (applicationContext as SGNApp).currentUser
+                Log.i("yes", "main: " + currentUser.toString())
+                if(currentUser == null) {
+                    replaceFragment(UserLoginFragment())
+                } else {
+                    // create liked articles fragment
+                    Log.i("yes", "testing liked")
+                }
                 return@OnNavigationItemSelectedListener true
             }
         }
@@ -72,6 +87,7 @@ class MainActivity : AppCompatActivity(),
     }
 
     private fun replaceFragment(fragment: Fragment) {
+        fragmentContainer.visibility = VISIBLE
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.fragmentContainer, fragment)
         fragmentTransaction.commit()
