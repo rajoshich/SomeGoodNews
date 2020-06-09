@@ -13,7 +13,6 @@ import kotlinx.android.synthetic.main.fragment_category.*
 
 
 class CategoryFragment : Fragment() {
-    lateinit var pageAdapter: TabsAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,49 +26,31 @@ class CategoryFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         category1.setOnClickListener {
-            val fragment = CategoryListFragment()
-            val args = Bundle()
-            args.putString("CATEGORY", "Humans being bros")
-            fragment.arguments = args
-            val fragmentManager: FragmentManager = activity!!.supportFragmentManager
-            val fragmentTransaction = fragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.fragment_category, fragment, CategoryListFragment.TAG)
-            fragmentTransaction.addToBackStack(CategoryListFragment.TAG)
-            fragmentTransaction.commit()  }
+            updateFrag("Humans being bros")
+        }
 
         category2.setOnClickListener {
-            val fragment = CategoryListFragment()
-            val args = Bundle()
-            args.putString("CATEGORY", "Aww")
-            fragment.arguments = args
-            val fragmentManager: FragmentManager = activity!!.supportFragmentManager
-            val fragmentTransaction = fragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.fragment_category, fragment, CategoryListFragment.TAG)
-            fragmentTransaction.addToBackStack(CategoryListFragment.TAG)
-            fragmentTransaction.commit()  }
+            updateFrag("Aww")
+        }
 
         category3.setOnClickListener {
-            val fragment = CategoryListFragment()
-            val args = Bundle()
-            args.putString("CATEGORY", "Covid-19")
-            fragment.arguments = args
-            val fragmentManager: FragmentManager = activity!!.supportFragmentManager
-            val fragmentTransaction = fragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.fragment_category, fragment, CategoryListFragment.TAG)
-            fragmentTransaction.addToBackStack(CategoryListFragment.TAG)
-            fragmentTransaction.commit()  }
+            updateFrag("Covid-19")
+        }
 
         category4.setOnClickListener {
-            val fragment = CategoryListFragment()
-            val args = Bundle()
-            args.putString("CATEGORY", "Other")
-            fragment.arguments = args
-            val fragmentManager: FragmentManager = activity!!.supportFragmentManager
-            val fragmentTransaction = fragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.fragment_category, fragment, CategoryListFragment.TAG)
-            fragmentTransaction.addToBackStack(CategoryListFragment.TAG)
-            fragmentTransaction.commit()  }
-
+            updateFrag("Other")
+        }
     }
 
+    private fun updateFrag(category: String) {
+        val fragment = CategoryListFragment()
+        val args = Bundle()
+        args.putString("CATEGORY", category)
+        fragment.arguments = args
+        val fragmentManager: FragmentManager = activity!!.supportFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.fragment_category, fragment, CategoryListFragment.TAG)
+        fragmentTransaction.addToBackStack(CategoryListFragment.TAG)
+        fragmentTransaction.commit()
+    }
 }
