@@ -10,11 +10,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.somegoodnews.Fragments.*
+import com.example.somegoodnews.Listeners.*
 import com.example.somegoodnews.Managers.NewsArticle
-import com.example.somegoodnews.Listeners.OnArticleClickListener
-import com.example.somegoodnews.Listeners.OnArticleLongClickListener
-import com.example.somegoodnews.Listeners.OnUpdateLikes
-import com.example.somegoodnews.Listeners.OnUpdateListListener
 import com.firebase.ui.auth.data.model.User
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.squareup.picasso.Picasso
@@ -57,6 +54,11 @@ class MainActivity : AppCompatActivity(),
                 Log.i("yes", "testing liked")
                 return@OnNavigationItemSelectedListener true
             }
+            R.id.profile -> {
+                replaceFragment(UserLoginFragment(), UserLoginFragment.TAG)
+                fragmentContainer.visibility = VISIBLE
+                return@OnNavigationItemSelectedListener true
+            }
         }
         false
     }
@@ -92,6 +94,14 @@ class MainActivity : AppCompatActivity(),
         Log.i("fuck", "Main update list called")
     }
 
+    private fun replaceFragment(fragment: Fragment, tag: String?) {
+        fragmentContainer.visibility = VISIBLE
+        val fragmentTransaction = supportFragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.fragmentContainer, fragment, tag)
+        fragmentTransaction.commit()
+    }
+
+    // When article is clicked
     override fun onArticleClicked(newsArticle: NewsArticle) {
         val frag = supportFragmentManager.findFragmentByTag(NewsArticleFragment.TAG) as? NewsArticleFragment
         if(frag == null) {
@@ -105,15 +115,8 @@ class MainActivity : AppCompatActivity(),
 
     }
 
-    private fun replaceFragment(fragment: Fragment, tag: String?) {
-        fragmentContainer.visibility = VISIBLE
-        val fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.fragmentContainer, fragment, tag)
-        fragmentTransaction.commit()
-    }
-
-    // Like article
-    override fun onArticleClicked(newsArticle: NewsArticle, pos: Int) {
+    // Like article when long clicked or like button is clicked
+    override fun likeArticle(newsArticle: NewsArticle, pos: Int) {
         val app = (applicationContext as SGNApp)
         val currUser = app.currentUser?.email
         if(currUser != null) {

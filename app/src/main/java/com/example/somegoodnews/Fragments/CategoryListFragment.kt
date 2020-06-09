@@ -55,7 +55,7 @@ class CategoryListFragment: Fragment() {
             }
         }
 
-        articlesAdapter = ArticlesAdapter(categoryArticles)
+        articlesAdapter = ArticlesAdapter(categoryArticles, context)
         rvNewsList.adapter = articlesAdapter
 
         articlesAdapter.onArticleLongClickListener = { newsArticle: NewsArticle, i: Int ->

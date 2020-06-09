@@ -19,5 +19,10 @@
         android:title="LIKED"
         android:icon="@drawable/liked"
         />
+    <item
+        android:id="@+id/profile"
+        android:title="PROFILE"
+        android:icon="@drawable/profile"
+        />
 
 </menu>

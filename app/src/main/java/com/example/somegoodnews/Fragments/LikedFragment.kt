@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.somegoodnews.Listeners.OnUpdateLikes
+import com.example.somegoodnews.Listeners.OnUpdateListListener
 import com.example.somegoodnews.Managers.ArticlesAdapter
 import com.example.somegoodnews.R
 import com.example.somegoodnews.SGNApp
@@ -19,6 +20,7 @@ class LikedFragment: Fragment() {
     private lateinit var articlesAdapter:ArticlesAdapter
     var onUpdateLikes: OnUpdateLikes? = null
     var currentUser: FirebaseUser? = null
+    var onUpdateListListener:OnUpdateListListener? = null
     companion object {
         val TAG: String = "LIKEDFRAG"
     }
@@ -33,6 +35,9 @@ class LikedFragment: Fragment() {
         app = (context.applicationContext as SGNApp)
         if(context is OnUpdateLikes) {
             onUpdateLikes = context
+        }
+        if(context is OnUpdateListListener) {
+            onUpdateListListener = context
         }
     }
 
@@ -50,7 +55,7 @@ class LikedFragment: Fragment() {
         app.dataManager.fetchLikedData(userEmail)
         val articles = app.dataManager.likedArticles?.toList()
         if(articles != null) {
-            articlesAdapter = ArticlesAdapter(articles)
+            articlesAdapter = ArticlesAdapter(articles, context)
             rvLikedNewsList.adapter = articlesAdapter
         } else {
             likedText.text = getString(R.string.no_liked)
@@ -62,7 +67,8 @@ class LikedFragment: Fragment() {
     fun updateLiked() {
         val articles = app.dataManager.likedArticles.toList()
         articlesAdapter.change(articles)
-
+        articlesAdapter.updateLikes(mutableListOf())
+        onUpdateListListener?.onUpdateList()
         Log.i("fuck", "fragment likes update")
     }
 }

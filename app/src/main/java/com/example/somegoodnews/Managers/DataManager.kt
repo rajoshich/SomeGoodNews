@@ -70,8 +70,10 @@ class DataManager {
                     val liked = mutableListOf<NewsArticle>()
                     value?.let { pos ->
                         likedArticlePos  = pos.toMutableList()
-                        pos.forEach {
-                            liked.add(articles[it.toInt() - 1])
+                        if(articles.size > 0) {
+                            pos.forEach {
+                                liked.add(articles[it.toInt() - 1])
+                            }
                         }
                         likedArticles = liked
                     }
@@ -105,6 +107,7 @@ class DataManager {
         database.getReference("users")
                 .child(user.replace(".", ""))
                 .child("likedArticles").setValue(list)
+        onUpdateListListener?.onUpdateList()
         Log.i("fuck", "liked" + list.toString())
     }
 

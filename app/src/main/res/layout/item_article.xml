@@ -22,7 +22,6 @@
         android:id="@+id/tvArticleHeadline"
         android:layout_width="210dp"
         android:layout_height="wrap_content"
-
         tools:text="Some Headline that is long very very long"
         app:layout_constraintLeft_toRightOf="@id/ivArticleImage"
         android:layout_marginLeft="16dp"
@@ -56,14 +55,15 @@
         android:textSize="14sp"
         />
 
- <!--   <ImageButton
+    <ImageButton
+        android:id="@+id/ibLikeArticle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:src="@drawable/ic_star_black"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="15dp"
-        app:layout_constraintBottom_toBottomOf="@id/ivArticleImage"
-        app:layout_constraintRight_toRightOf="parent"/>-->
+        app:layout_constraintTop_toBottomOf="@id/tvArticleCategory"
+        app:layout_constraintLeft_toRightOf="@id/ivArticleImage"
+        android:padding="16dp"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

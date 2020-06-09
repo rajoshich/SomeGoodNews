@@ -52,7 +52,7 @@ class NewsListFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val articles = app.dataManager.articles
-        articlesAdapter = ArticlesAdapter(articles)
+        articlesAdapter = ArticlesAdapter(articles, context)
         rvNewsList.adapter = articlesAdapter
 
         articlesAdapter.onArticleClickListener = {
@@ -63,7 +63,7 @@ class NewsListFragment: Fragment() {
         }
 
         articlesAdapter.onArticleLongClickListener = { newsArticle: NewsArticle, i: Int ->
-            onArticleLongClickListener?.onArticleClicked(newsArticle, i)
+            onArticleLongClickListener?.likeArticle(newsArticle, i)
         }
         // Testing
         Log.i("fuck", "From fragment: $articles")
@@ -73,8 +73,7 @@ class NewsListFragment: Fragment() {
     fun onUpdateList() {
         val articles = app.dataManager.articles
         articlesAdapter.change(articles)
-
-
+        articlesAdapter.updateLikes(app.dataManager.likedArticlePos)
         // Testing
         val numArticles = articles.size
         Log.i("fuck", "Updated List, list now has $numArticles articles")

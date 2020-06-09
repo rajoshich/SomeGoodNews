@@ -139,11 +139,9 @@ class UserLoginFragment: Fragment() {
         if (user != null) {
             status.text = getString(R.string.emailpassword_status_fmt,
                 user.email)
-
             emailPasswordButtons.visibility = View.GONE
             emailPasswordFields.visibility = View.GONE
             signedInButtons.visibility = View.VISIBLE
-            view?.visibility = View.GONE
         } else {
             status.setText(getString(R.string.signed_out))
             emailPasswordButtons.visibility = View.VISIBLE
@@ -154,8 +152,13 @@ class UserLoginFragment: Fragment() {
     }
 
     private fun updateUser(newUser: FirebaseUser?) {
+        // updates user in app and here
         currentUser = newUser
-        (context?.applicationContext as SGNApp).currentUser = newUser
-        Log.i("fuck", "new user: " + currentUser.toString())
+        val app = (context?.applicationContext as SGNApp)
+        app.currentUser = newUser
+        Log.i("fuck", "new user: " + currentUser?.email.toString())
+        currentUser?.let {
+            (context?.applicationContext as SGNApp).dataManager.fetchLikedData(it.email.toString())
+        }
     }
 }
