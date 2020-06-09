@@ -18,6 +18,7 @@ class DataManager {
     var articles: MutableList<NewsArticle> = mutableListOf()
     var likedArticlePos: MutableList<String> = mutableListOf()
     var likedArticles: MutableList<NewsArticle> = mutableListOf()
+    var userArticles: MutableList<String> = mutableListOf()
     var onUpdateListListener: OnUpdateListListener? = null
     var onUpdateLikes:OnUpdateLikes? = null
 
@@ -33,7 +34,7 @@ class DataManager {
                 val value = dataSnapshot.getValue<ArrayList<NewsArticle>>()
                 value?.let {
                     // Drop 1st cause it's always null for some reason
-                    articles = value.drop(1).toMutableList()
+                    articles = value.toMutableList()
                     Log.i("fuck", articles.toString())
                 }
                 onUpdateListListener?.onUpdateList()
@@ -105,5 +106,35 @@ class DataManager {
                 .child(user.replace(".", ""))
                 .child("likedArticles").setValue(list)
         Log.i("fuck", "liked" + list.toString())
+    }
+
+    fun addArticle(newsArticle: NewsArticle, user:String) {
+        database = Firebase.database
+        // add to main articles
+        articles.add(newsArticle)
+        database.getReference("articles").setValue(articles)
+        onUpdateListListener?.onUpdateList()
+
+        // Get current list of articles for user
+        val userArticlesRef = database.getReference("users")
+            .child(user.replace(".", ""))
+            .child("newsArticles")
+
+        userArticlesRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                val value = dataSnapshot.getValue<ArrayList<String>>()
+                value?.let {
+                    userArticles = value.toMutableList()
+                    Log.i("potty", "user articles:" + userArticles.toString())
+                }
+            }
+            override fun onCancelled(error: DatabaseError) {
+                Log.i(TAG, "Failed to get user articles.", error.toException())
+            }
+        })
+        // Add the new article
+        userArticles.add((articles.size - 1).toString())
+        userArticlesRef.setValue(userArticles)
+
     }
 }

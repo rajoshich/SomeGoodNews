@@ -8,3 +8,4 @@ data class NewsArticle (
     val date: String = "",
     val source: String = ""
 )
+

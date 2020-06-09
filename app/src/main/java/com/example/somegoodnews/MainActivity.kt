@@ -39,18 +39,19 @@ class MainActivity : AppCompatActivity(),
                 return@OnNavigationItemSelectedListener true
             }
             R.id.submit -> {
-                var currentUser = (applicationContext as SGNApp).currentUser
+                val currentUser = (applicationContext as SGNApp).currentUser
                 Log.i("yes", "main: " + currentUser.toString())
                 if(currentUser == null) {
                     replaceFragment(UserLoginFragment.getInstance(), UserLoginFragment.TAG)
                 } else {
                     // create submit fragment
+                    replaceFragment(SubmitNewsFragment.getInstance(), SubmitNewsFragment.TAG)
                     Log.i("yes", "testing submit")
                 }
                 return@OnNavigationItemSelectedListener true
             }
             R.id.liked -> {
-                var currentUser = (applicationContext as SGNApp).currentUser
+                val currentUser = (applicationContext as SGNApp).currentUser
                 Log.i("yes", "main: " + currentUser.toString())
                 if(currentUser == null) {
                     replaceFragment(UserLoginFragment.getInstance(), UserLoginFragment.TAG)
@@ -58,7 +59,7 @@ class MainActivity : AppCompatActivity(),
                     val frag = supportFragmentManager.findFragmentByTag(LikedFragment.TAG) as? LikedFragment
                     fragmentContainer.visibility = VISIBLE
                     if(frag == null) {
-                        replaceFragment(LikedFragment(), "LIKEDFRAG")
+                        replaceFragment(LikedFragment(), LikedFragment.TAG)
                     } else {
                         frag.updateLiked()
                     }

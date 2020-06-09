@@ -53,7 +53,7 @@ class CategoryFragment : Fragment() {
         category3.setOnClickListener {
             val fragment = CategoryListFragment()
             val args = Bundle()
-            args.putString("CATEGORY", "Covid-19")
+            args.putString("CATEGORY", "COVID-19")
             fragment.arguments = args
 
             val fragmentManager: FragmentManager = activity!!.supportFragmentManager

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ScrollView01"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="vertical"
+    android:background="@color/white">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!--Put form controls here-->
+        <TextView
+            android:id="@+id/TextViewTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/submitTitle"
+            android:textSize="10pt"
+            android:padding="10dp"
+            android:background="@color/colorPrimary"
+            android:textColor="@color/black"
+            android:textAlignment="center">
+        </TextView>
+        <EditText
+            android:id="@+id/etHeadline"
+            android:layout_height="wrap_content"
+            android:hint="@string/enter_headline"
+            android:inputType="textMultiLine"
+            android:lines="3"
+            android:layout_width="match_parent"
+            android:layout_marginTop="20dp">
+        </EditText>
+        <EditText
+            android:id="@+id/etContent"
+            android:layout_height="wrap_content"
+            android:hint="@string/enter_content"
+            android:inputType="textMultiLine"
+            android:layout_width="match_parent"
+            android:lines="10"
+            android:layout_marginTop="20dp">
+        </EditText>
+        <Spinner
+            android:id="@+id/category"
+            android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:entries="@array/categoriesList"
+            android:layout_marginTop="20dp">
+        </Spinner>
+        <EditText
+            android:id="@+id/etImgLink"
+            android:layout_height="wrap_content"
+            android:hint="@string/image_link"
+            android:inputType="text"
+            android:layout_width="match_parent"
+            android:layout_marginTop="20dp"/>
+        <Button
+            android:id="@+id/btnSubmitNews"
+            android:layout_height="wrap_content"
+            android:text="@string/submitNews"
+            android:layout_width="fill_parent"
+            android:layout_marginTop="20dp">
+        </Button>
+    </LinearLayout>
+</ScrollView>

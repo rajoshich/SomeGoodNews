@@ -1,12 +1,9 @@
 <resources>
     <string name="app_name">Some Good News</string>
     <string name="title_activity_tabs">TabsActivity</string>
-    <string name="tab_text_1">Tab 1</string>
-    <string name="tab_text_2">Tab 2</string>
     <string name="emailpassword_status_fmt">Welcome! %1$s </string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
     <string name="signed_out">Signed Out</string>
     <string name="fake_content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam et vestibulum justo.
         Proin lacinia feugiat ante in aliquet. Aenean neque ipsum, vestibulum quis diam eget, semper pellentesque odio.
@@ -15,5 +12,16 @@
         in placerat risus semper.Nulla ultrices ornare metus, vel vulputate augue auctor vel. Sed dignissim dignissim rutrum.
         Morbi magna ex, rutrum et dolor a, gravida accumsan augue. tur.
     </string>
+
     <string name="no_liked">You have no liked articles</string>
+    <string name="feedbacktype1">Humans Being Bros</string>
+    <string name="feedbacktype2">COVID-19</string>
+    <string name="feedbacktype3">Just for laughs</string>
+    <string name="feedbacktype4">Aww</string>
+    <string name="feedbacktype5">Other</string>
+    <string name="submitTitle">New Good News</string>
+    <string name="enter_headline">Enter Headline</string>
+    <string name="enter_content">Enter Content</string>
+    <string name="image_link">Image Link</string>
+    <string name="submitNews">Send Good vibes</string>
 </resources>

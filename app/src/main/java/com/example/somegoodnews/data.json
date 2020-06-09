@@ -1,6 +1,6 @@
 {
   "articles" : {
-    "1" : {
+    "0" : {
       "category" : "Humans being bros ",
       "content" : "My daughter has been a nanny for this amazing kid for over a year. When he realized she wouldn’t have a senior prom, he wanted to throw her one. He planned a socially distant prom, complete with dancing & her favorite foods.",
       "date" : "May 27, 2020",
@@ -8,7 +8,7 @@
       "img" : "https://pbs.twimg.com/media/EY-wMV1WkAY7Wsi?format=jpg&name=large",
       "source" : "@bhchapman"
     },
-    "2" : {
+    "1" : {
       "category" : "Humans being bros ",
       "content" : "Everest HS football players spent the whole day helping families devastated by the flooding in the Midland MI area.  Many grateful people!  There is still much to be done but there were smiles today!  Thanks Coach P!!!",
       "date" : "May 25, 2020",
@@ -16,7 +16,7 @@
       "img" : "https://pbs.twimg.com/media/EY3aNNpXkAA1yV8?format=jpg&name=large",
       "source" : "@kwillertz"
     },
-    "3" : {
+    "2" : {
       "category" : "Humans being bros ",
       "content" : "Our #SomeGoodNews of the day is my caring daughter Isabelle donated 10 inches to @CWHL_org for kids with cancer! So proud of her!",
       "date" : "May 17, 2020",
@@ -24,7 +24,7 @@
       "img" : "https://pbs.twimg.com/media/EYPQFBpWAAMGIgT?format=jpg&name=large",
       "source" : "@ajsmith1983"
     },
-    "4" : {
+    "3" : {
       "category" : "Humans being bros ",
       "content" : "After 10 whole weeks, my Grandma (who moved to a new, unfamiliar care home and isn’t allowed visitors) has finally learned how to FaceTime.",
       "date" : "May 30, 2020",
@@ -32,7 +32,7 @@
       "img" : "https://pbs.twimg.com/media/EZN87o_WAAI5Dcq?format=jpg&name=large",
       "source" : "@ktvncnt"
     },
-    "5" : {
+    "4" : {
       "category" : "Humans being bros",
       "content" : "Kivi was born 2 days ago. Her name means “protected” in Hebrew. Pretty sure we found the protector.",
       "date" : "May 16, 2020",
@@ -44,12 +44,10 @@
   "test" : "djfhsdkhfk",
   "users" : {
     "coolbro@uwedu" : {
-      "likedArticles" : ["1" , "5"],
-      "newsArticles" : ["2", "3", "4" ]
+      "likedArticles" : ["1" , "5"]
     },
     "wholesomellama@testcom" : {
-      "likedArticles" : ["1"],
-      "newsArticles" : ["5"]
+      "likedArticles" : ["1"]
     }
   }
 }
