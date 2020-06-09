@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.example.somegoodnews.Listeners.OnUpdateLikes
 import com.example.somegoodnews.Managers.ArticlesAdapter
 import com.example.somegoodnews.R
 import com.example.somegoodnews.SGNApp
@@ -16,6 +17,7 @@ import kotlinx.android.synthetic.main.fragment_liked.*
 class LikedFragment: Fragment() {
     lateinit var app: SGNApp
     private lateinit var articlesAdapter:ArticlesAdapter
+    var onUpdateLikes: OnUpdateLikes? = null
     var currentUser: FirebaseUser? = null
     companion object {
         val TAG: String = "LIKEDFRAG"
@@ -29,6 +31,9 @@ class LikedFragment: Fragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         app = (context.applicationContext as SGNApp)
+        if(context is OnUpdateLikes) {
+            onUpdateLikes = context
+        }
     }
 
     override fun onCreateView(
@@ -55,7 +60,9 @@ class LikedFragment: Fragment() {
     }
 
     fun updateLiked() {
-        val articles = app.dataManager.likedArticles?.toList()
+        val articles = app.dataManager.likedArticles.toList()
         articlesAdapter.change(articles)
+
+        Log.i("fuck", "fragment likes update")
     }
 }

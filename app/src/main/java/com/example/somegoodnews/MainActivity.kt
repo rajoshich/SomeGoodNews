@@ -1,17 +1,21 @@
 package com.example.somegoodnews
 
 import TabsAdapter
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.somegoodnews.Fragments.*
 import com.example.somegoodnews.Managers.NewsArticle
 import com.example.somegoodnews.Listeners.OnArticleClickListener
 import com.example.somegoodnews.Listeners.OnArticleLongClickListener
+import com.example.somegoodnews.Listeners.OnUpdateLikes
 import com.example.somegoodnews.Listeners.OnUpdateListListener
+import com.firebase.ui.auth.data.model.User
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main.*
@@ -22,6 +26,7 @@ import kotlinx.android.synthetic.main.tab_layout.*
 
 class MainActivity : AppCompatActivity(),
     OnUpdateListListener,
+    OnUpdateLikes,
     OnArticleClickListener,
     OnArticleLongClickListener {
 
@@ -51,6 +56,7 @@ class MainActivity : AppCompatActivity(),
                     replaceFragment(UserLoginFragment.getInstance(), UserLoginFragment.TAG)
                 } else {
                     val frag = supportFragmentManager.findFragmentByTag(LikedFragment.TAG) as? LikedFragment
+                    fragmentContainer.visibility = VISIBLE
                     if(frag == null) {
                         replaceFragment(LikedFragment(), "LIKEDFRAG")
                     } else {
@@ -68,8 +74,10 @@ class MainActivity : AppCompatActivity(),
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        (applicationContext as SGNApp).dataManager.onUpdateListListener = this
-
+        // Set listeners
+        val app = (applicationContext as SGNApp)
+        app.dataManager.onUpdateListListener = this
+        app.dataManager.onUpdateLikes = this
         // Stuff to setup tab layout thing
         setSupportActionBar(toolbarMain)
         pageAdapter = TabsAdapter(supportFragmentManager)
@@ -78,7 +86,10 @@ class MainActivity : AppCompatActivity(),
         pageAdapter.addFragments(CategoryFragment(), "Categories")
         viewPager.adapter = pageAdapter
         tabLayout.setupWithViewPager(viewPager)
+        // bottom nav bar
         bottomNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+        // Immediately prompt user to log in
+        replaceFragment(UserLoginFragment.getInstance(), UserLoginFragment.TAG)
     }
 
     override fun onUpdateList() {
@@ -92,10 +103,12 @@ class MainActivity : AppCompatActivity(),
     override fun onArticleClicked(newsArticle: NewsArticle) {
         val frag = supportFragmentManager.findFragmentByTag(NewsArticleFragment.TAG) as? NewsArticleFragment
         if(frag == null) {
-
-            replaceFragment(NewsListFragment(), "NEWSARTICLE")
+            replaceFragment(NewsArticleFragment(), NewsArticleFragment.TAG)
+            Log.i("fuck", "NEW")
         } else {
+            fragmentContainer.visibility = VISIBLE
             frag.updateArticle()
+            Log.i("fuck", "OLD")
         }
 
     }
@@ -105,5 +118,25 @@ class MainActivity : AppCompatActivity(),
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.fragmentContainer, fragment, tag)
         fragmentTransaction.commit()
+    }
+
+    // Like article
+    override fun onArticleClicked(newsArticle: NewsArticle, pos: Int) {
+        val app = (applicationContext as SGNApp)
+        val currUser = app.currentUser?.email
+        if(currUser != null) {
+            app.dataManager.likeArticle(newsArticle, pos, currUser, this)
+        } else {
+            Toast.makeText(this, "Not logged in", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    override fun updateLikesList() {
+        val frag = supportFragmentManager.findFragmentByTag(LikedFragment.TAG) as? LikedFragment
+        if(frag == null) {
+            Log.i("fuck", "Main update null")
+        }
+        frag?.updateLiked()
+        Log.i("fuck", "Main update")
     }
 }

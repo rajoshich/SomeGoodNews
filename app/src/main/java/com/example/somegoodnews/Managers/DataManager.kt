@@ -1,6 +1,9 @@
 package com.example.somegoodnews.Managers
 
+import android.content.Context
 import android.util.Log
+import android.widget.Toast
+import com.example.somegoodnews.Listeners.OnUpdateLikes
 import com.example.somegoodnews.Listeners.OnUpdateListListener
 import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
@@ -13,8 +16,10 @@ class DataManager {
     }
     private lateinit var database:FirebaseDatabase
     var articles: MutableList<NewsArticle> = mutableListOf()
+    var likedArticlePos: MutableList<String> = mutableListOf()
     var likedArticles: MutableList<NewsArticle> = mutableListOf()
     var onUpdateListListener: OnUpdateListListener? = null
+    var onUpdateLikes:OnUpdateLikes? = null
 
     fun fetchData() {
         database = Firebase.database
@@ -44,9 +49,10 @@ class DataManager {
         })
     }
 
-    fun fetchLikedData(user: String?) {
+    fun fetchLikedData(user: String?): MutableList<NewsArticle>? {
         if(user == null) {
             Log.i("fuck", "no user")
+            return null
         } else {
             database = Firebase.database
             val myRef = database.getReference("users")
@@ -60,12 +66,16 @@ class DataManager {
                     // whenever data at this location is updated.
                     val value = dataSnapshot.getValue<ArrayList<String>>()
                     Log.i("fuck", "Liked articles index" + value.toString())
+                    val liked = mutableListOf<NewsArticle>()
                     value?.let { pos ->
+                        likedArticlePos  = pos.toMutableList()
                         pos.forEach {
-                            likedArticles.add(articles[it.toInt() - 1])
+                            liked.add(articles[it.toInt() - 1])
                         }
+                        likedArticles = liked
                     }
                     Log.i("fuck", "Liked articles wohoo" + likedArticles.toString())
+                    onUpdateLikes?.updateLikesList()
                 }
 
                 override fun onCancelled(error: DatabaseError) {
@@ -73,6 +83,27 @@ class DataManager {
                     Log.i(TAG, "Failed to get liked articles.", error.toException())
                 }
             })
+        return likedArticles
         }
+    }
+
+    fun likeArticle(newsArticle: NewsArticle, pos:Int, user: String, context: Context) {
+        database = Firebase.database
+        fetchLikedData(user)
+        var list = likedArticlePos
+        val posStr = (pos + 1).toString()
+        if(list.contains(posStr)) {
+            list.remove(posStr)
+            val text = "\"" +newsArticle.headline + "\" has been removed from bookmarks"
+            Toast.makeText(context, text, Toast.LENGTH_SHORT).show()
+        } else {
+            list.add(posStr)
+            val text = "\"" +newsArticle.headline + "\" has been added to bookmarks"
+            Toast.makeText(context, text, Toast.LENGTH_SHORT).show()
+        }
+        database.getReference("users")
+                .child(user.replace(".", ""))
+                .child("likedArticles").setValue(list)
+        Log.i("fuck", "liked" + list.toString())
     }
 }
