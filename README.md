@@ -1,7 +1,9 @@
 # SomeGoodNews
+The whole world was thrown into an unprecedented situation. 
 Constantly consuming news about the pandemic can lead to excessive mental stress and fatigue. 
 Which is why our team was inspired by [John Krasinski's YouTube show](https://www.youtube.com/channel/UCOe_y6KKvS3PdIfb9q9pGug) 
-and **aims to bring you only good news from around the world.** :revolving_hearts:
+and **aims to bring you only good news from around the world.** 
+This is why our team was inspired by John Krasinski's YouTube show and aims to bring you only good news from around the world. This android application allows you to scroll through some wholesome news, save them for later or add your own to spread the love!:revolving_hearts:
 
 ## Screenshots
 
@@ -18,6 +20,11 @@ and **aims to bring you only good news from around the world.** :revolving_heart
 - :woman: [@saashamoruw](https://github.com/saashamoruw)
 - :purple_heart: Special shoutout to [Eric Chee](https://github.com/echeeUW) for being an amazing instructor
  
+## Upcoming features
+- Receive daily notifications about the top news
+- Sort news by "wholesome-ness"
+- Review process to prevent un-wholesome news
+
 ## Frameworks used
 - Firebase
 - Kotlin
