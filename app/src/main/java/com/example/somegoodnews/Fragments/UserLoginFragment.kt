@@ -163,8 +163,8 @@ class UserLoginFragment: Fragment() {
         currentUser = newUser
         val app = (context?.applicationContext as SGNApp)
         app.currentUser = newUser
-        Log.i("fuck", "new user: " + currentUser?.email.toString())
         currentUser?.let {
+            Log.i("poopy", "new user: " + currentUser?.email.toString())
             (context?.applicationContext as SGNApp).dataManager.fetchLikedData(it.email.toString())
         }
     }

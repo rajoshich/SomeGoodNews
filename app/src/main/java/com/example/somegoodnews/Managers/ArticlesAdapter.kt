@@ -12,12 +12,14 @@ import androidx.core.content.ContextCompat.getColor
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.somegoodnews.R
+import com.example.somegoodnews.SGNApp
 import com.squareup.picasso.Picasso
 
-class ArticlesAdapter(allArticles: List<NewsArticle>, context: Context?): RecyclerView.Adapter<ArticlesAdapter.ArticleViewHolder>() {
+class ArticlesAdapter(allArticles: List<NewsArticle>, context: Context?, frag: String?): RecyclerView.Adapter<ArticlesAdapter.ArticleViewHolder>() {
     private var allArticles: List<NewsArticle> = allArticles.toList()
-    private var likedArticles: List<String>? = null
+    private var likedArticles: List<NewsArticle>? = null
     private val context = context
+    private val isFrag: String? = frag
     var onArticleClickListener: ((article: NewsArticle) -> Unit)? = null
     var onArticleLongClickListener: ((article: NewsArticle, position: Int) -> Unit)? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleViewHolder {
@@ -29,19 +31,18 @@ class ArticlesAdapter(allArticles: List<NewsArticle>, context: Context?): Recycl
         return allArticles.size
     }
     fun change(newArticles: List<NewsArticle>) {
+        updateLikes()
         val callback =
-            ArticleDiffCallback(allArticles, newArticles)
+            ArticleDiffCallback(allArticles, newArticles, likedArticles)
         val diffRes = DiffUtil.calculateDiff(callback)
         diffRes.dispatchUpdatesTo(this)
         // Testing
-        Log.i("fuck", "old: $allArticles, new: $newArticles")
-
+        Log.i("poopy", "old: $allArticles, new: $newArticles")
         allArticles = newArticles
     }
-    fun updateLikes(likedArticles: List<String>) {
-        this.likedArticles = likedArticles
-        change(allArticles)
-        Log.i("poopy", "liked articles: " + likedArticles.toString())
+    fun updateLikes() {
+        this.likedArticles = (context?.applicationContext as SGNApp).dataManager.likedArticles
+        Log.i("poopy", "liked articles: " + this.likedArticles.toString())
     }
 
     override fun onBindViewHolder(holder: ArticleViewHolder, position: Int) {
@@ -62,10 +63,12 @@ class ArticlesAdapter(allArticles: List<NewsArticle>, context: Context?): Recycl
             if(!article.img.isNullOrEmpty()) {
                 Picasso.get().load(article.img).into(ivArticleImage)
             }
+            ibLikeArticle.setBackgroundResource(R.drawable.btn_rounded)
+            ibLikeArticle.text = "ADD TO LIKED"
             if(likedArticles != null) {
                 likedArticles?.forEach {
-                    if(it.toInt() == position) {
-                        Log.i("poopy", it + " liked article")
+                    if(it.headline == article.headline) {
+                        Log.i("poopy", it.headline + " liked article")
                         context?.let {
                             // TODO: Ashmann: I thought this was your code to show that the post has been liked already
                             ibLikeArticle.setBackgroundResource(R.drawable.clicked_btn_rounded)
@@ -73,9 +76,11 @@ class ArticlesAdapter(allArticles: List<NewsArticle>, context: Context?): Recycl
                         }
                     }
                 }
-            } else {
-                Log.i("poopy", "liked is null " + position)
             }
+            if(isFrag != null) {
+                ibLikeArticle.visibility = View.GONE
+            }
+
             itemView.setOnClickListener {
                 onArticleClickListener?.invoke(article)
             }

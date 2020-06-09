@@ -21,7 +21,6 @@ class CategoryListFragment : Fragment() {
     lateinit var app: SGNApp
     private var onUpdateListListener: OnUpdateListListener? = null
     var onArticleClickListener: OnArticleClickListener? = null
-    var onArticleLongClickListener: OnArticleLongClickListener? = null
     private val categoryArticles: MutableList<NewsArticle> = mutableListOf()
     companion object {
         const val TAG = "CATEGORY_LIST_FRAG"
@@ -40,10 +39,6 @@ class CategoryListFragment : Fragment() {
         if (context is OnArticleClickListener) {
             onArticleClickListener = context
         }
-
-        if (context is OnArticleLongClickListener) {
-            onArticleLongClickListener = context
-        }
     }
 
     override fun onCreateView(
@@ -58,7 +53,7 @@ class CategoryListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         getCategoryArticles()
-        articlesAdapter = ArticlesAdapter(categoryArticles, context)
+        articlesAdapter = ArticlesAdapter(categoryArticles, context, TAG)
         rvNewsList.adapter = articlesAdapter
 
         articlesAdapter.onArticleClickListener = {
@@ -66,9 +61,6 @@ class CategoryListFragment : Fragment() {
             onArticleClickListener?.onArticleClicked(it)
         }
 
-        articlesAdapter.onArticleLongClickListener = { newsArticle: NewsArticle, i: Int ->
-            onArticleLongClickListener?.likeArticle(newsArticle, i)
-        }
     }
 
     private fun getCategoryArticles() {

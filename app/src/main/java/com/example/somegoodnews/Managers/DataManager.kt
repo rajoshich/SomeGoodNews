@@ -72,7 +72,7 @@ class DataManager {
                         likedArticlePos  = pos.toMutableList()
                         if(articles.size > 0) {
                             pos.forEach {
-                                liked.add(articles[it.toInt() - 1])
+                                liked.add(articles[it.toInt()])
                             }
                         }
                         likedArticles = liked
@@ -94,7 +94,7 @@ class DataManager {
         database = Firebase.database
         fetchLikedData(user)
         var list = likedArticlePos
-        val posStr = (pos + 1).toString()
+        val posStr = (pos).toString()
         if(list.contains(posStr)) {
             list.remove(posStr)
             val text = "\"" +newsArticle.headline + "\" has been removed from bookmarks"

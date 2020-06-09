@@ -62,13 +62,13 @@ class MainActivity : AppCompatActivity(),
         }
         false
     }
-
+    lateinit var app: SGNApp
     lateinit var pageAdapter: TabsAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        app = (applicationContext as SGNApp)
         // Set listeners
-        val app = (applicationContext as SGNApp)
         app.dataManager.onUpdateListListener = this
         app.dataManager.onUpdateLikes = this
         // Stuff to setup tab layout thing
@@ -117,7 +117,6 @@ class MainActivity : AppCompatActivity(),
 
     // Like article when long clicked or like button is clicked
     override fun likeArticle(newsArticle: NewsArticle, pos: Int) {
-        val app = (applicationContext as SGNApp)
         val currUser = app.currentUser?.email
         if(currUser != null) {
             app.dataManager.likeArticle(newsArticle, pos, currUser, this)
@@ -129,14 +128,14 @@ class MainActivity : AppCompatActivity(),
     override fun updateLikesList() {
         val frag = supportFragmentManager.findFragmentByTag(LikedFragment.TAG) as? LikedFragment
         if(frag == null) {
-            Log.i("fuck", "Main update null")
+            Log.i("poopy", "Main update likes null")
         }
         frag?.updateLiked()
-        Log.i("fuck", "Main update")
+        Log.i("poopy", "Main update likes")
     }
 
     private fun checkSignedIn() {
-        val currentUser = (applicationContext as SGNApp).currentUser
+        val currentUser = app.currentUser
         if(currentUser == null) {
             var frag = supportFragmentManager.findFragmentByTag(UserLoginFragment.TAG) as? UserLoginFragment
             if(frag == null) {

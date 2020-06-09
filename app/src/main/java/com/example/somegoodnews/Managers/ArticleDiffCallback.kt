@@ -4,7 +4,8 @@ import androidx.recyclerview.widget.DiffUtil
 
 class ArticleDiffCallback (
     private val old: List<NewsArticle>,
-    private val new: List<NewsArticle>
+    private val new: List<NewsArticle>,
+    private val liked: List<NewsArticle>?
     ): DiffUtil.Callback() {
         override fun getOldListSize() = old.size
 
@@ -15,6 +16,6 @@ class ArticleDiffCallback (
         override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
             val oldItem = old[oldItemPosition]
             val newItem = new[newItemPosition]
-            return ((oldItem.headline == newItem.headline) && (oldItem.source == newItem.source))
+            return ((oldItem.headline == newItem.headline) && (oldItem.source == newItem.source) && liked == null)
         }
 }

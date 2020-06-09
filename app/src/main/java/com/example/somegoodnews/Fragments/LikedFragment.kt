@@ -14,6 +14,7 @@ import com.example.somegoodnews.R
 import com.example.somegoodnews.SGNApp
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.fragment_liked.*
+import kotlinx.android.synthetic.main.item_article.*
 
 class LikedFragment: Fragment() {
     lateinit var app: SGNApp
@@ -55,7 +56,7 @@ class LikedFragment: Fragment() {
         app.dataManager.fetchLikedData(userEmail)
         val articles = app.dataManager.likedArticles?.toList()
         if(articles != null) {
-            articlesAdapter = ArticlesAdapter(articles, context)
+            articlesAdapter = ArticlesAdapter(articles, context, TAG)
             rvLikedNewsList.adapter = articlesAdapter
         } else {
             likedText.text = getString(R.string.no_liked)
@@ -65,10 +66,11 @@ class LikedFragment: Fragment() {
     }
 
     fun updateLiked() {
-        val articles = app.dataManager.likedArticles.toList()
-        articlesAdapter.change(articles)
-        articlesAdapter.updateLikes(mutableListOf())
-        onUpdateListListener?.onUpdateList()
-        Log.i("fuck", "fragment likes update")
+        val likedArticles = app.dataManager.likedArticles.toList()
+        articlesAdapter.change(likedArticles)
+        articlesAdapter.updateLikes()
+        // update the main list
+        app.dataManager.fetchData()
+        Log.i("poopy", "fragment likes update")
     }
 }
