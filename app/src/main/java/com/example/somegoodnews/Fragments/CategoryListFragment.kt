@@ -18,6 +18,9 @@ class CategoryListFragment: Fragment() {
     private lateinit var articlesAdapter: ArticlesAdapter
     lateinit var app: SGNApp
     private var onUpdateListListener: OnUpdateListListener? = null
+    companion object {
+        const val TAG = "CATEGORY_LIST_FRAG"
+    }
 
     private val categoryArticles: MutableList<NewsArticle> = mutableListOf()
     override fun onCreate(savedInstanceState: Bundle?) {
