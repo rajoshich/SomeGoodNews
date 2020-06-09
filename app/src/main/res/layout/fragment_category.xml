@@ -35,6 +35,7 @@
             app:layout_constraintRight_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:text="Categories"
+            android:textColor="@color/black"
             android:textSize="20sp"/>
 
         <GridLayout
@@ -46,38 +47,81 @@
             app:layout_constraintRight_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/categoryTitle">
 
-            <TextView
-                android:id="@+id/category1"
+            <GridLayout
                 android:layout_width="160dp"
-                android:layout_height="200dp"
-                android:layout_margin="10dp"
-                android:text="Humans being bros"
-                android:gravity="bottom|center"
-                android:background="@color/cardview_shadow_start_color"/>
-            <TextView
-                android:id="@+id/category2"
+                android:layout_height="180dp"
+                android:columnCount="1"
+                android:rowCount="2">
+                <ImageView
+                    android:layout_width="160dp"
+                    android:layout_height="160dp"
+                    android:background="@drawable/holding_hands"/>
+                <TextView
+                    android:id="@+id/category1"
+                    android:text="Humans being bros"
+                    android:layout_gravity="center"
+                    android:textStyle="bold"/>
+            </GridLayout>
+
+            <GridLayout
                 android:layout_width="160dp"
-                android:layout_height="200dp"
-                android:layout_margin="10dp"
-                android:text="Aww"
-                android:gravity="bottom|center"
-                android:background="@color/colorPrimary"/>
-            <TextView
-                android:id="@+id/category3"
+                android:layout_height="180dp"
+                android:columnCount="1"
+                android:rowCount="2"
+                android:layout_gravity="center">
+                <ImageView
+                    android:layout_width="140dp"
+                    android:layout_height="140dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/cute"/>
+                <TextView
+                    android:id="@+id/category2"
+                    android:text="Aww"
+                    android:layout_marginTop="6dp"
+                    android:layout_gravity="center"
+                    android:textStyle="bold"/>
+            </GridLayout>
+
+            <GridLayout
                 android:layout_width="160dp"
-                android:layout_height="200dp"
-                android:layout_margin="10dp"
-                android:text="Covid-19"
-                android:gravity="bottom|center"
-                android:background="@color/colorPrimary"/>
-            <TextView
-                android:id="@+id/category4"
+                android:layout_height="180dp"
+                android:columnCount="1"
+                android:rowCount="2"
+                android:layout_gravity="center">
+                <ImageView
+                    android:layout_width="140dp"
+                    android:layout_height="140dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/virus"/>
+                <TextView
+                    android:id="@+id/category3"
+                    android:text="Covid-19"
+                    android:layout_marginTop="6dp"
+                    android:layout_gravity="center"
+                    android:textStyle="bold"/>
+            </GridLayout>
+
+            <GridLayout
                 android:layout_width="160dp"
-                android:layout_height="200dp"
-                android:layout_margin="10dp"
-                android:text="Other"
-                android:gravity="bottom|center"
-                android:background="@color/cardview_shadow_start_color"/>
+                android:layout_height="180dp"
+                android:columnCount="1"
+                android:rowCount="2"
+                android:layout_gravity="center">
+                <ImageView
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/news"/>
+                <TextView
+                    android:id="@+id/category4"
+                    android:text="Other"
+                    android:layout_marginTop="10dp"
+                    android:layout_gravity="center"
+                    android:textStyle="bold"/>
+            </GridLayout>
 
         </GridLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
