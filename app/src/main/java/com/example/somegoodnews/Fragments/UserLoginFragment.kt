@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import com.example.somegoodnews.R
 import com.example.somegoodnews.SGNApp
 import com.google.firebase.FirebaseApp
@@ -71,6 +72,12 @@ class UserLoginFragment: Fragment() {
                     Log.i("fuck", "signInWithEmail:success")
                     updateUser(auth.currentUser)
                     updateUI(currentUser)
+                    // redirect to newslist
+                    val fragmentManager: FragmentManager = activity!!.supportFragmentManager
+                    val fragmentTransaction = fragmentManager.beginTransaction()
+                    fragmentTransaction.replace(R.id.main_layout, NewsListFragment(), NewsListFragment.TAG)
+                    fragmentTransaction.addToBackStack(NewsListFragment.TAG)
+                    fragmentTransaction.commit()
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.i("fuck", "signInWithEmail:failure", task.exception)

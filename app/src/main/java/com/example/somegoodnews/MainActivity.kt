@@ -135,7 +135,7 @@ class MainActivity : AppCompatActivity(),
         Log.i("fuck", "Main update")
     }
 
-    fun checkSignedIn() {
+    private fun checkSignedIn() {
         val currentUser = (applicationContext as SGNApp).currentUser
         if(currentUser == null) {
             var frag = supportFragmentManager.findFragmentByTag(UserLoginFragment.TAG) as? UserLoginFragment

@@ -22,6 +22,9 @@ class NewsListFragment: Fragment() {
     private var onUpdateListListener: OnUpdateListListener? = null
     var onArticleClickListener: OnArticleClickListener? = null
     var onArticleLongClickListener: OnArticleLongClickListener? = null
+    companion object {
+        const val TAG = "NEWS_LIST"
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         app = (context?.applicationContext as SGNApp)
