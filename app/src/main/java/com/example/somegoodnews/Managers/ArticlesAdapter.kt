@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat.getColor
@@ -53,7 +54,7 @@ class ArticlesAdapter(allArticles: List<NewsArticle>, context: Context?): Recycl
         private val tvNewsCategory by lazy {itemView.findViewById<TextView>(R.id.tvArticleCategory)}
         private val tvNewsSource by lazy {itemView.findViewById<TextView>(R.id.tvArticleSource)}
         private val ivArticleImage by lazy {itemView.findViewById<ImageView>(R.id.ivArticleImage)}
-        private val ibLikeArticle by lazy {itemView.findViewById<ImageView>(R.id.ibLikeArticle)}
+        private val ibLikeArticle by lazy {itemView.findViewById<Button>(R.id.ibLikeArticle)}
         fun bind(article: NewsArticle, position: Int) {
             tvNewsHeading.text = article.headline
             tvNewsCategory.text = article.category
@@ -65,7 +66,11 @@ class ArticlesAdapter(allArticles: List<NewsArticle>, context: Context?): Recycl
                 likedArticles?.forEach {
                     if(it.toInt() == position) {
                         Log.i("poopy", it + " liked article")
-                        context?.let { ibLikeArticle.setColorFilter(getColor(context, R.color.colorPrimary)) }
+                        context?.let {
+                            // TODO: Ashmann: I thought this was your code to show that the post has been liked already
+                            ibLikeArticle.setBackgroundResource(R.drawable.clicked_btn_rounded)
+                            ibLikeArticle.text = "REMOVE FROM LIKED"
+                        }
                     }
                 }
             } else {

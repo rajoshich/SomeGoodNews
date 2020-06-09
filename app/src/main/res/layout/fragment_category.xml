@@ -48,6 +48,7 @@
             app:layout_constraintTop_toBottomOf="@+id/categoryTitle">
 
             <GridLayout
+                android:id="@+id/category1"
                 android:layout_width="160dp"
                 android:layout_height="180dp"
                 android:columnCount="1"
@@ -57,13 +58,13 @@
                     android:layout_height="160dp"
                     android:background="@drawable/holding_hands"/>
                 <TextView
-                    android:id="@+id/category1"
                     android:text="Humans being bros"
                     android:layout_gravity="center"
                     android:textStyle="bold"/>
             </GridLayout>
 
             <GridLayout
+                android:id="@+id/category2"
                 android:layout_width="160dp"
                 android:layout_height="180dp"
                 android:columnCount="1"
@@ -76,7 +77,6 @@
                     android:layout_marginTop="10dp"
                     android:background="@drawable/cute"/>
                 <TextView
-                    android:id="@+id/category2"
                     android:text="Aww"
                     android:layout_marginTop="6dp"
                     android:layout_gravity="center"
@@ -84,6 +84,7 @@
             </GridLayout>
 
             <GridLayout
+                android:id="@+id/category3"
                 android:layout_width="160dp"
                 android:layout_height="180dp"
                 android:columnCount="1"
@@ -96,7 +97,6 @@
                     android:layout_marginTop="10dp"
                     android:background="@drawable/virus"/>
                 <TextView
-                    android:id="@+id/category3"
                     android:text="Covid-19"
                     android:layout_marginTop="6dp"
                     android:layout_gravity="center"
@@ -104,6 +104,7 @@
             </GridLayout>
 
             <GridLayout
+                android:id="@+id/category4"
                 android:layout_width="160dp"
                 android:layout_height="180dp"
                 android:columnCount="1"
@@ -116,7 +117,6 @@
                     android:layout_marginTop="20dp"
                     android:background="@drawable/news"/>
                 <TextView
-                    android:id="@+id/category4"
                     android:text="Other"
                     android:layout_marginTop="10dp"
                     android:layout_gravity="center"
