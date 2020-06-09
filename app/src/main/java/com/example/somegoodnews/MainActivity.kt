@@ -39,32 +39,22 @@ class MainActivity : AppCompatActivity(),
                 return@OnNavigationItemSelectedListener true
             }
             R.id.submit -> {
-                val currentUser = (applicationContext as SGNApp).currentUser
-                Log.i("yes", "main: " + currentUser.toString())
-                if(currentUser == null) {
-                    replaceFragment(UserLoginFragment.getInstance(), UserLoginFragment.TAG)
-                } else {
-                    // create submit fragment
-                    replaceFragment(SubmitNewsFragment.getInstance(), SubmitNewsFragment.TAG)
-                    Log.i("yes", "testing submit")
-                }
+                // create submit fragment
+                checkSignedIn()
+                replaceFragment(SubmitNewsFragment.getInstance(), SubmitNewsFragment.TAG)
+                Log.i("yes", "testing submit")
                 return@OnNavigationItemSelectedListener true
             }
             R.id.liked -> {
-                val currentUser = (applicationContext as SGNApp).currentUser
-                Log.i("yes", "main: " + currentUser.toString())
-                if(currentUser == null) {
-                    replaceFragment(UserLoginFragment.getInstance(), UserLoginFragment.TAG)
+                checkSignedIn()
+                val frag = supportFragmentManager.findFragmentByTag(LikedFragment.TAG) as? LikedFragment
+                fragmentContainer.visibility = VISIBLE
+                if(frag == null) {
+                    replaceFragment(LikedFragment(), LikedFragment.TAG)
                 } else {
-                    val frag = supportFragmentManager.findFragmentByTag(LikedFragment.TAG) as? LikedFragment
-                    fragmentContainer.visibility = VISIBLE
-                    if(frag == null) {
-                        replaceFragment(LikedFragment(), LikedFragment.TAG)
-                    } else {
-                        frag.updateLiked()
-                    }
-                    Log.i("yes", "testing liked")
+                    frag.updateLiked()
                 }
+                Log.i("yes", "testing liked")
                 return@OnNavigationItemSelectedListener true
             }
         }
@@ -89,6 +79,7 @@ class MainActivity : AppCompatActivity(),
         tabLayout.setupWithViewPager(viewPager)
         // bottom nav bar
         bottomNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+
         // Immediately prompt user to log in
         replaceFragment(UserLoginFragment.getInstance(), UserLoginFragment.TAG)
     }
@@ -139,5 +130,16 @@ class MainActivity : AppCompatActivity(),
         }
         frag?.updateLiked()
         Log.i("fuck", "Main update")
+    }
+
+    fun checkSignedIn() {
+        val currentUser = (applicationContext as SGNApp).currentUser
+        if(currentUser == null) {
+            var frag = supportFragmentManager.findFragmentByTag(UserLoginFragment.TAG) as? UserLoginFragment
+            if(frag == null) {
+                frag = UserLoginFragment()
+            }
+            replaceFragment(frag, UserLoginFragment.TAG)
+        }
     }
 }

@@ -15,6 +15,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.sign_in_fragment.*
 
 class UserLoginFragment: Fragment() {
@@ -96,6 +97,7 @@ class UserLoginFragment: Fragment() {
                     Log.i("fuck", "createUserWithEmail:success")
                     val user = auth.currentUser
                     updateUI(user)
+                    signIn(email, password)
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.i("fuck", "createUserWithEmail:failure", task.exception)
@@ -141,39 +143,16 @@ class UserLoginFragment: Fragment() {
             emailPasswordButtons.visibility = View.GONE
             emailPasswordFields.visibility = View.GONE
             signedInButtons.visibility = View.VISIBLE
-            /*if (user.isEmailVerified) {
-                verifyEmailButton.visibility = View.GONE
-            } else {
-                verifyEmailButton.visibility = View.VISIBLE
-            }*/
+            view?.visibility = View.GONE
         } else {
             status.setText(getString(R.string.signed_out))
             emailPasswordButtons.visibility = View.VISIBLE
             emailPasswordFields.visibility = View.VISIBLE
             signedInButtons.visibility = View.GONE
+            view?.visibility = View.VISIBLE
         }
     }
 
-    fun addLikedArticle(pos:Int) {
-        if(currentUser == null) {
-            Log.i("fuck", "Cannot like article")
-        } else {
-            currentUser?.email?.let {
-                Firebase.database.getReference("users").child(it)
-                    .child("likedArticles").setValue(pos)
-            }
-        }
-    }
-    fun getLikedArticles() {
-        if(currentUser == null) {
-            Log.i("fuck", "Cannot like article")
-        } else {
-            currentUser?.email?.let {
-                Firebase.database.getReference("users").child(it)
-                    .child("likedArticles")
-            }
-        }
-    }
     private fun updateUser(newUser: FirebaseUser?) {
         currentUser = newUser
         (context?.applicationContext as SGNApp).currentUser = newUser
