@@ -69,6 +69,7 @@ class DataManager {
                     Log.i("fuck", "Liked articles index" + value.toString())
                     val liked = mutableListOf<NewsArticle>()
                     value?.let { pos ->
+                        // array of positions of articles in the main article list
                         likedArticlePos  = pos.toMutableList()
                         if(articles.size > 0) {
                             pos.forEach {
@@ -93,7 +94,8 @@ class DataManager {
     fun likeArticle(newsArticle: NewsArticle, pos:Int, user: String, context: Context) {
         database = Firebase.database
         fetchLikedData(user)
-        var list = likedArticlePos
+        // position of the article in main news list
+        val list = likedArticlePos
         val posStr = (pos).toString()
         if(list.contains(posStr)) {
             list.remove(posStr)
