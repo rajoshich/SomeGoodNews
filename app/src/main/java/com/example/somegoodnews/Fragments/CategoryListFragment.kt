@@ -59,7 +59,7 @@ class CategoryListFragment: Fragment() {
         rvNewsList.adapter = articlesAdapter
 
         articlesAdapter.onArticleLongClickListener = { newsArticle: NewsArticle, i: Int ->
-            app.likeArticle(newsArticle, i)
+            Log.i("fuck", "category list long click")
         }
     }
 }

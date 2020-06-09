@@ -13,7 +13,7 @@ class DataManager {
     }
     private lateinit var database:FirebaseDatabase
     var articles: MutableList<NewsArticle> = mutableListOf()
-//    var articlesMap: HashMap<String, NewsArticle> = hashMapOf()
+    var likedArticles: MutableList<NewsArticle> = mutableListOf()
     var onUpdateListListener: OnUpdateListListener? = null
 
     fun fetchData() {
@@ -42,5 +42,37 @@ class DataManager {
                 Log.i(TAG, "Failed to read value.", error.toException())
             }
         })
+    }
+
+    fun fetchLikedData(user: String?) {
+        if(user == null) {
+            Log.i("fuck", "no user")
+        } else {
+            database = Firebase.database
+            val myRef = database.getReference("users")
+                .child(user.replace(".", ""))
+                .child("likedArticles")
+
+            // Read from the database
+            myRef.addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    // This method is called once with the initial value and again
+                    // whenever data at this location is updated.
+                    val value = dataSnapshot.getValue<ArrayList<String>>()
+                    Log.i("fuck", "Liked articles index" + value.toString())
+                    value?.let { pos ->
+                        pos.forEach {
+                            likedArticles.add(articles[it.toInt() - 1])
+                        }
+                    }
+                    Log.i("fuck", "Liked articles wohoo" + likedArticles.toString())
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    // Failed to read value
+                    Log.i(TAG, "Failed to get liked articles.", error.toException())
+                }
+            })
+        }
     }
 }

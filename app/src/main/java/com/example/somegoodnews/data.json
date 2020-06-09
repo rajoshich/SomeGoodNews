@@ -43,13 +43,13 @@
   },
   "test" : "djfhsdkhfk",
   "users" : {
-    "coolBro" : {
-      "liked articles" : ["1" , "5"],
-      "news articles" : ["2", "3", "4" ]
+    "coolbro@uwedu" : {
+      "likedArticles" : ["1" , "5"],
+      "newsArticles" : ["2", "3", "4" ]
     },
-    "wholesomeLlama" : {
-      "liked articles" : ["1"],
-      "news articles" : ["5"]
+    "wholesomellama@testcom" : {
+      "likedArticles" : ["1"],
+      "newsArticles" : ["5"]
     }
   }
 }

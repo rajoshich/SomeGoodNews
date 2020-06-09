@@ -44,12 +44,11 @@ class NewsListFragment: Fragment() {
         rvNewsList.adapter = articlesAdapter
 
         articlesAdapter.onArticleClickListener = {
-            // add new fragment??
             app.lastArticle = it
         }
 
         articlesAdapter.onArticleLongClickListener = { newsArticle: NewsArticle, i: Int ->
-            app.likeArticle(newsArticle, i)
+
         }
         // Testing
         Log.i("fuck", "From fragment: $articles")

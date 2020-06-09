@@ -21,6 +21,7 @@ class UserLoginFragment: Fragment() {
     private lateinit var auth: FirebaseAuth
     var currentUser: FirebaseUser? = null
     companion object {
+        var TAG: String = "USERLOGINFRAG"
         fun getInstance(): UserLoginFragment {
             return UserLoginFragment()
         }
@@ -160,6 +161,16 @@ class UserLoginFragment: Fragment() {
             currentUser?.email?.let {
                 Firebase.database.getReference("users").child(it)
                     .child("likedArticles").setValue(pos)
+            }
+        }
+    }
+    fun getLikedArticles() {
+        if(currentUser == null) {
+            Log.i("fuck", "Cannot like article")
+        } else {
+            currentUser?.email?.let {
+                Firebase.database.getReference("users").child(it)
+                    .child("likedArticles")
             }
         }
     }

@@ -7,27 +7,29 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.example.somegoodnews.Fragments.CategoryFragment
-import com.example.somegoodnews.Fragments.NewsListFragment
-import com.example.somegoodnews.Fragments.UserLoginFragment
+import com.example.somegoodnews.Fragments.*
 import com.example.somegoodnews.Managers.NewsArticle
 import com.example.somegoodnews.Listeners.OnArticleClickListener
+import com.example.somegoodnews.Listeners.OnArticleLongClickListener
 import com.example.somegoodnews.Listeners.OnUpdateListListener
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.item_article.*
+import kotlinx.android.synthetic.main.newsarticle_fragment.*
 import kotlinx.android.synthetic.main.tab_layout.*
 
 
 class MainActivity : AppCompatActivity(),
     OnUpdateListListener,
-    OnArticleClickListener {
+    OnArticleClickListener,
+    OnArticleLongClickListener {
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when(item.itemId) {
             R.id.home -> {
-                item.setIcon(R.drawable.news_selected)
                 Log.i("yes", "testing home")
-                /*replaceFragment(NewsListFragment())*/
+                item.setIcon(R.drawable.news_selected)
                 fragmentContainer.visibility = GONE
                 return@OnNavigationItemSelectedListener true
             }
@@ -35,7 +37,7 @@ class MainActivity : AppCompatActivity(),
                 var currentUser = (applicationContext as SGNApp).currentUser
                 Log.i("yes", "main: " + currentUser.toString())
                 if(currentUser == null) {
-                    replaceFragment(UserLoginFragment())
+                    replaceFragment(UserLoginFragment.getInstance(), UserLoginFragment.TAG)
                 } else {
                     // create submit fragment
                     Log.i("yes", "testing submit")
@@ -46,9 +48,14 @@ class MainActivity : AppCompatActivity(),
                 var currentUser = (applicationContext as SGNApp).currentUser
                 Log.i("yes", "main: " + currentUser.toString())
                 if(currentUser == null) {
-                    replaceFragment(UserLoginFragment())
+                    replaceFragment(UserLoginFragment.getInstance(), UserLoginFragment.TAG)
                 } else {
-                    // create liked articles fragment
+                    val frag = supportFragmentManager.findFragmentByTag(LikedFragment.TAG) as? LikedFragment
+                    if(frag == null) {
+                        replaceFragment(LikedFragment(), "LIKEDFRAG")
+                    } else {
+                        frag.updateLiked()
+                    }
                     Log.i("yes", "testing liked")
                 }
                 return@OnNavigationItemSelectedListener true
@@ -83,13 +90,20 @@ class MainActivity : AppCompatActivity(),
     }
 
     override fun onArticleClicked(newsArticle: NewsArticle) {
-        TODO("Not yet implemented")
+        val frag = supportFragmentManager.findFragmentByTag(NewsArticleFragment.TAG) as? NewsArticleFragment
+        if(frag == null) {
+
+            replaceFragment(NewsListFragment(), "NEWSARTICLE")
+        } else {
+            frag.updateArticle()
+        }
+
     }
 
-    private fun replaceFragment(fragment: Fragment) {
+    private fun replaceFragment(fragment: Fragment, tag: String?) {
         fragmentContainer.visibility = VISIBLE
         val fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.fragmentContainer, fragment)
+        fragmentTransaction.replace(R.id.fragmentContainer, fragment, tag)
         fragmentTransaction.commit()
     }
 }
