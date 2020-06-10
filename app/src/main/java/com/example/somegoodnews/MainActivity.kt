@@ -30,28 +30,29 @@ class MainActivity : AppCompatActivity(),
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when(item.itemId) {
             R.id.home -> {
-                Log.i("yes", "testing home")
+                if(!checkSignedIn()){
+                    fragmentContainer.visibility = GONE
+                }
                 item.setIcon(R.drawable.news_selected)
-                fragmentContainer.visibility = GONE
                 return@OnNavigationItemSelectedListener true
             }
             R.id.submit -> {
                 // create submit fragment
-                checkSignedIn()
-                replaceFragment(SubmitNewsFragment.getInstance(), SubmitNewsFragment.TAG)
-                Log.i("yes", "testing submit")
+                if(!checkSignedIn()){
+                    replaceFragment(SubmitNewsFragment.getInstance(), SubmitNewsFragment.TAG)
+                }
                 return@OnNavigationItemSelectedListener true
             }
             R.id.liked -> {
-                checkSignedIn()
-                val frag = supportFragmentManager.findFragmentByTag(LikedFragment.TAG) as? LikedFragment
-                fragmentContainer.visibility = VISIBLE
-                if(frag == null) {
-                    replaceFragment(LikedFragment(), LikedFragment.TAG)
-                } else {
-                    frag.updateLiked()
+                if(!checkSignedIn()) {
+                    val frag = supportFragmentManager.findFragmentByTag(LikedFragment.TAG) as? LikedFragment
+                    fragmentContainer.visibility = VISIBLE
+                    if(frag == null) {
+                        replaceFragment(LikedFragment(), LikedFragment.TAG)
+                    } else {
+                        frag.updateLiked()
+                    }
                 }
-                Log.i("yes", "testing liked")
                 return@OnNavigationItemSelectedListener true
             }
             R.id.profile -> {
@@ -84,14 +85,15 @@ class MainActivity : AppCompatActivity(),
 
         // Immediately prompt user to log in
         replaceFragment(UserLoginFragment.getInstance(), UserLoginFragment.TAG)
+        if(app.currentUser != null) {
+            fragmentContainer.visibility = GONE
+        }
     }
 
     override fun onUpdateList() {
         // Gets the newsListFragment from the viewpager since there is no TAG
         val newsListFragment = pageAdapter.instantiateItem(viewPager, viewPager.currentItem) as NewsListFragment
         newsListFragment.onUpdateList()
-
-        Log.i("fuck", "Main update list called")
     }
 
     private fun replaceFragment(fragment: Fragment, tag: String?) {
@@ -106,11 +108,9 @@ class MainActivity : AppCompatActivity(),
         val frag = supportFragmentManager.findFragmentByTag(NewsArticleFragment.TAG) as? NewsArticleFragment
         if(frag == null) {
             replaceFragment(NewsArticleFragment(), NewsArticleFragment.TAG)
-            Log.i("fuck", "NEW")
         } else {
             fragmentContainer.visibility = VISIBLE
             frag.updateArticle()
-            Log.i("fuck", "OLD")
         }
 
     }
@@ -127,14 +127,10 @@ class MainActivity : AppCompatActivity(),
 
     override fun updateLikesList() {
         val frag = supportFragmentManager.findFragmentByTag(LikedFragment.TAG) as? LikedFragment
-        if(frag == null) {
-            Log.i("poopy", "Main update likes null")
-        }
         frag?.updateLiked()
-        Log.i("poopy", "Main update likes")
     }
 
-    private fun checkSignedIn() {
+    private fun checkSignedIn(): Boolean {
         val currentUser = app.currentUser
         if(currentUser == null) {
             var frag = supportFragmentManager.findFragmentByTag(UserLoginFragment.TAG) as? UserLoginFragment
@@ -142,6 +138,8 @@ class MainActivity : AppCompatActivity(),
                 frag = UserLoginFragment()
             }
             replaceFragment(frag, UserLoginFragment.TAG)
+            fragmentContainer.visibility = VISIBLE
         }
+        return currentUser == null
     }
 }

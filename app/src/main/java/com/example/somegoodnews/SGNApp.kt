@@ -16,6 +16,7 @@ class SGNApp: Application() {
         super.onCreate()
         dataManager = DataManager()
         dataManager.fetchData()
+        dataManager.fetchLikedData(currentUser?.email.toString())
     }
 
 }

@@ -61,15 +61,12 @@ class NewsListFragment: Fragment() {
         articlesAdapter.onArticleClickListener = {
             app.lastArticle = it
             onArticleClickListener?.onArticleClicked(it)
-            Log.i("fuck", "news list click")
 
         }
 
         articlesAdapter.onArticleLongClickListener = { newsArticle: NewsArticle, i: Int ->
             onArticleLongClickListener?.likeArticle(newsArticle, i)
         }
-        // Testing
-        Log.i("fuck", "From fragment: $articles")
     }
 
 
@@ -78,7 +75,6 @@ class NewsListFragment: Fragment() {
         articlesAdapter.change(articles)
         // Testing
         val numArticles = articles.size
-        Log.i("poopy", "Updated List, list now has $numArticles articles")
 
     }
 }

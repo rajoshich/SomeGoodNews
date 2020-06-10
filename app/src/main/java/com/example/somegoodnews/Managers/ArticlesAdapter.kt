@@ -37,12 +37,10 @@ class ArticlesAdapter(allArticles: List<NewsArticle>, context: Context?, frag: S
         val diffRes = DiffUtil.calculateDiff(callback)
         diffRes.dispatchUpdatesTo(this)
         // Testing
-        Log.i("poopy", "old: $allArticles, new: $newArticles")
         allArticles = newArticles
     }
     fun updateLikes() {
         this.likedArticles = (context?.applicationContext as SGNApp).dataManager.likedArticles
-        Log.i("poopy", "liked articles: " + this.likedArticles.toString())
     }
 
     override fun onBindViewHolder(holder: ArticleViewHolder, position: Int) {
@@ -68,7 +66,6 @@ class ArticlesAdapter(allArticles: List<NewsArticle>, context: Context?, frag: S
             if(likedArticles != null) {
                 likedArticles?.forEach {
                     if(it.headline == article.headline) {
-                        Log.i("poopy", it.headline + " liked article")
                         context?.let {
                             // TODO: Ashmann: I thought this was your code to show that the post has been liked already
                             ibLikeArticle.setBackgroundResource(R.drawable.clicked_btn_rounded)

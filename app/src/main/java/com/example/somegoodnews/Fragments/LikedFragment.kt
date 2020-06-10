@@ -2,7 +2,6 @@ package com.example.somegoodnews.Fragments
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -54,15 +53,13 @@ class LikedFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
         var userEmail = app.currentUser?.email.toString()
         app.dataManager.fetchLikedData(userEmail)
-        val articles = app.dataManager.likedArticles?.toList()
+        val articles = app.dataManager.likedArticles.toList()
         if(articles != null) {
             articlesAdapter = ArticlesAdapter(articles, context, TAG)
             rvLikedNewsList.adapter = articlesAdapter
         } else {
             likedText.text = getString(R.string.no_liked)
         }
-        // Testing
-        Log.i("fuck", "Liked: $articles")
     }
 
     fun updateLiked() {
@@ -71,6 +68,5 @@ class LikedFragment: Fragment() {
         articlesAdapter.updateLikes()
         // update the main list
         app.dataManager.fetchData()
-        Log.i("poopy", "fragment likes update")
     }
 }

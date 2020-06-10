@@ -1,5 +1,6 @@
 package com.example.somegoodnews.Fragments
 
+import android.content.Context
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
@@ -9,6 +10,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import com.example.somegoodnews.Listeners.OnUpdateLikes
+import com.example.somegoodnews.Listeners.OnUpdateListListener
 import com.example.somegoodnews.R
 import com.example.somegoodnews.SGNApp
 import com.google.firebase.FirebaseApp
@@ -22,6 +25,7 @@ import kotlinx.android.synthetic.main.sign_in_fragment.*
 class UserLoginFragment: Fragment() {
     private lateinit var auth: FirebaseAuth
     var currentUser: FirebaseUser? = null
+    var onUpdateLikes: OnUpdateLikes? = null
     companion object {
         var TAG: String = "USERLOGINFRAG"
         fun getInstance(): UserLoginFragment {
@@ -32,7 +36,6 @@ class UserLoginFragment: Fragment() {
         super.onCreate(savedInstanceState)
         auth = FirebaseAuth(FirebaseApp.getInstance())
         updateUser(auth.currentUser)
-        Log.i("fuck", currentUser.toString())
     }
 
     override fun onCreateView(
@@ -42,6 +45,7 @@ class UserLoginFragment: Fragment() {
     ): View? {
         return layoutInflater.inflate(R.layout.sign_in_fragment, container, false)
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -61,7 +65,6 @@ class UserLoginFragment: Fragment() {
     }
 
     private fun signIn(email: String, password: String) {
-        Log.i("fuck", "signIn:$email")
         if (!validateForm()) {
             return
         }
@@ -69,7 +72,6 @@ class UserLoginFragment: Fragment() {
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
-                    Log.i("fuck", "signInWithEmail:success")
                     updateUser(auth.currentUser)
                     updateUI(currentUser)
                     // redirect to newslist
@@ -80,20 +82,14 @@ class UserLoginFragment: Fragment() {
                     fragmentTransaction.commit()
                 } else {
                     // If sign in fails, display a message to the user.
-                    Log.i("fuck", "signInWithEmail:failure", task.exception)
                     Toast.makeText(context, "Authentication failed.",
                         Toast.LENGTH_SHORT).show()
                     updateUI(null)
-                }
-
-                if (!task.isSuccessful) {
-                    // Show some error message?
                 }
             }
     }
 
     private fun createAccount(email: String, password: String) {
-        Log.i("fuck", "createAccount:$email")
         if (!validateForm()) {
             return
         }
@@ -101,13 +97,11 @@ class UserLoginFragment: Fragment() {
             .addOnCompleteListener{ task ->
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
-                    Log.i("fuck", "createUserWithEmail:success")
                     val user = auth.currentUser
                     updateUI(user)
                     signIn(email, password)
                 } else {
                     // If sign in fails, display a message to the user.
-                    Log.i("fuck", "createUserWithEmail:failure", task.exception)
                     Toast.makeText(context, "Authentication failed.",
                         Toast.LENGTH_SHORT).show()
                     updateUI(null)
@@ -150,7 +144,7 @@ class UserLoginFragment: Fragment() {
             emailPasswordFields.visibility = View.GONE
             signedInButtons.visibility = View.VISIBLE
         } else {
-            status.setText(getString(R.string.signed_out))
+            status.text = getString(R.string.signed_out)
             emailPasswordButtons.visibility = View.VISIBLE
             emailPasswordFields.visibility = View.VISIBLE
             signedInButtons.visibility = View.GONE
@@ -163,9 +157,11 @@ class UserLoginFragment: Fragment() {
         currentUser = newUser
         val app = (context?.applicationContext as SGNApp)
         app.currentUser = newUser
-        currentUser?.let {
-            Log.i("poopy", "new user: " + currentUser?.email.toString())
-            (context?.applicationContext as SGNApp).dataManager.fetchLikedData(it.email.toString())
-        }
+        app.dataManager.likedArticles = mutableListOf()
+        app.dataManager.likedArticlePos = mutableListOf()
+        onUpdateLikes?.updateLikesList()
+        Log.i("saashm", "New User " + newUser?.email)
+        // Trigger other info update
+
     }
 }
