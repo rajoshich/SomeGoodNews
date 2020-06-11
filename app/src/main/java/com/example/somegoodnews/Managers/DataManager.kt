@@ -14,11 +14,11 @@ class DataManager {
     companion object {
         private const val TAG = "DATAMANAGER"
     }
-    private lateinit var database:FirebaseDatabase
     var articles: MutableList<NewsArticle> = mutableListOf()
     var likedArticlePos: MutableList<String> = mutableListOf()
     var likedArticles: MutableList<NewsArticle> = mutableListOf()
     var userArticles: MutableList<String> = mutableListOf()
+    private lateinit var database:FirebaseDatabase
     var onUpdateListListener: OnUpdateListListener? = null
     var onUpdateLikes:OnUpdateLikes? = null
 
@@ -58,7 +58,6 @@ class DataManager {
             val myRef = database.getReference("users")
                 .child(user.replace(".", ""))
                 .child("likedArticles")
-
             // Read from the database
             myRef.addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
@@ -74,27 +73,26 @@ class DataManager {
                                 liked.add(articles[it.toInt()])
                             }
                         } else {
-                            Log.i("saashm", "There are likes but no articles")
+                            Log.i("saashm", "List of articles is empty")
                         }
                         likedArticles = liked
                     }
-                    onUpdateListListener?.onUpdateList()
-                    onUpdateLikes?.updateLikesList()
+                    Log.i("saashm", "fetching likes for $user")
                     Log.i("saashm", "Liked: " + likedArticles)
+                    onUpdateLikes?.updateLikesList()
                 }
 
                 override fun onCancelled(error: DatabaseError) {
                     // Failed to read value
                     Log.i(TAG, "Failed to get liked articles.", error.toException())
                 }
-
             })
-        return likedArticles
+            return likedArticles
         }
     }
 
     fun likeArticle(newsArticle: NewsArticle, pos:Int, user: String, context: Context) {
-        if(user.isNullOrEmpty()) {
+        if(!user.isNullOrEmpty()) {
             database = Firebase.database
             fetchLikedData(user)
             // position of the article in main news list

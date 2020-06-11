@@ -2,6 +2,7 @@ package com.example.somegoodnews
 
 import TabsAdapter
 import android.app.Application
+import android.util.Log
 import com.example.somegoodnews.Managers.DataManager
 import com.example.somegoodnews.Managers.NewsArticle
 import com.example.somegoodnews.Fragments.UserLoginFragment
@@ -16,7 +17,15 @@ class SGNApp: Application() {
         super.onCreate()
         dataManager = DataManager()
         dataManager.fetchData()
-        dataManager.fetchLikedData(currentUser?.email.toString())
+    }
+
+    fun refreshData() {
+        Log.i("saashm", "Refreshing all data")
+        currentUser = null
+        lastArticle = null
+        dataManager.likedArticlePos = mutableListOf()
+        dataManager.likedArticles = mutableListOf()
+        dataManager.userArticles = mutableListOf()
     }
 
 }

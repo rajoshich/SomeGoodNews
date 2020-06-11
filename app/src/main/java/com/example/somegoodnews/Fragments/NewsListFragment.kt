@@ -72,9 +72,9 @@ class NewsListFragment: Fragment() {
 
     fun onUpdateList() {
         val articles = app.dataManager.articles
-        articlesAdapter.change(articles)
+        articlesAdapter.change(articles, app.dataManager.likedArticles)
         // Testing
-        val numArticles = articles.size
+        Log.i("saashm", "all articles updated")
 
     }
 }

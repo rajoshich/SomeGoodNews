@@ -36,6 +36,7 @@ class UserLoginFragment: Fragment() {
         super.onCreate(savedInstanceState)
         auth = FirebaseAuth(FirebaseApp.getInstance())
         updateUser(auth.currentUser)
+        Log.i("saashm", "User login fragment created")
     }
 
     override fun onCreateView(
@@ -156,12 +157,11 @@ class UserLoginFragment: Fragment() {
         // updates user in app and here
         currentUser = newUser
         val app = (context?.applicationContext as SGNApp)
+        app.refreshData()
         app.currentUser = newUser
-        app.dataManager.likedArticles = mutableListOf()
-        app.dataManager.likedArticlePos = mutableListOf()
-        onUpdateLikes?.updateLikesList()
         Log.i("saashm", "New User " + newUser?.email)
         // Trigger other info update
+        onUpdateLikes?.updateLikesList()
 
     }
 }

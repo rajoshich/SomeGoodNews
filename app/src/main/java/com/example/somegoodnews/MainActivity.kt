@@ -126,8 +126,10 @@ class MainActivity : AppCompatActivity(),
     }
 
     override fun updateLikesList() {
+//        app.dataManager.fetchLikedData(app.currentUser?.email.toString())
         val frag = supportFragmentManager.findFragmentByTag(LikedFragment.TAG) as? LikedFragment
         frag?.updateLiked()
+        Log.i("saashm", "main likes update")
     }
 
     private fun checkSignedIn(): Boolean {

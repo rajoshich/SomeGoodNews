@@ -1,25 +1,22 @@
 package com.example.somegoodnews.Managers
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.content.ContextCompat.getColor
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.somegoodnews.R
-import com.example.somegoodnews.SGNApp
 import com.squareup.picasso.Picasso
 
 class ArticlesAdapter(allArticles: List<NewsArticle>, context: Context?, frag: String?): RecyclerView.Adapter<ArticlesAdapter.ArticleViewHolder>() {
     private var allArticles: List<NewsArticle> = allArticles.toList()
     private var likedArticles: List<NewsArticle>? = null
     private val context = context
-    private val isFrag: String? = frag
+    private val isNewsList: String? = frag
     var onArticleClickListener: ((article: NewsArticle) -> Unit)? = null
     var onArticleLongClickListener: ((article: NewsArticle, position: Int) -> Unit)? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleViewHolder {
@@ -30,17 +27,17 @@ class ArticlesAdapter(allArticles: List<NewsArticle>, context: Context?, frag: S
     override fun getItemCount(): Int {
         return allArticles.size
     }
-    fun change(newArticles: List<NewsArticle>) {
-        updateLikes()
+    fun change(newArticles: List<NewsArticle>, likedArticles: List<NewsArticle>?) {
+        // update liked articles only if its coming from news list change
+        if(isNewsList == null) {
+            this.likedArticles = likedArticles
+        }
         val callback =
             ArticleDiffCallback(allArticles, newArticles, likedArticles)
         val diffRes = DiffUtil.calculateDiff(callback)
         diffRes.dispatchUpdatesTo(this)
         // Testing
         allArticles = newArticles
-    }
-    fun updateLikes() {
-        this.likedArticles = (context?.applicationContext as SGNApp).dataManager.likedArticles
     }
 
     override fun onBindViewHolder(holder: ArticleViewHolder, position: Int) {
@@ -74,7 +71,7 @@ class ArticlesAdapter(allArticles: List<NewsArticle>, context: Context?, frag: S
                     }
                 }
             }
-            if(isFrag != null) {
+            if(isNewsList != null) {
                 ibLikeArticle.visibility = View.GONE
             }
 
