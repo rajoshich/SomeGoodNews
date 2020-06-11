@@ -27,6 +27,8 @@ This is why our team was inspired by John Krasinski's YouTube show and aims to b
 - Receive daily notifications about the top news
 - Sort news by "wholesome-ness"
 - Review process to prevent un-wholesome news
+- Use View Model to clean up code
+- Add responsive animations
 
 ## Frameworks used
 - Firebase

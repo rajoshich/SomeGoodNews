@@ -38,12 +38,14 @@ class SubmitNewsFragment : Fragment() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun submitNews() {
-        if(!cbConfirm.isChecked) {
-            Toast.makeText(context, "You must confirm this is wholesome news", Toast.LENGTH_SHORT).show()
+        if (!cbConfirm.isChecked) {
+            Toast.makeText(context, "You must confirm this is wholesome news", Toast.LENGTH_SHORT)
+                .show()
         } else {
             var imgLink = etImgLink.text.toString()
-            if(imgLink.isEmpty()) {
-                imgLink = "https://images.pexels.com/photos/3944463/pexels-photo-3944463.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+            if (imgLink.isEmpty()) {
+                imgLink =
+                    "https://images.pexels.com/photos/3944463/pexels-photo-3944463.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
             }
             val app = (context?.applicationContext as SGNApp)
             val user = app.currentUser?.email.toString()
@@ -53,7 +55,8 @@ class SubmitNewsFragment : Fragment() {
                 etContent.text.toString(),
                 imgLink,
                 LocalDate.now().toString(),
-                user)
+                user
+            )
             app.dataManager.addArticle(newArticle, user)
             Toast.makeText(context, "Good vibes sent!", Toast.LENGTH_SHORT).show()
         }
@@ -63,6 +66,6 @@ class SubmitNewsFragment : Fragment() {
         val TAG: String = "SUBMITNEWS"
         fun getInstance(): SubmitNewsFragment {
             return SubmitNewsFragment()
-            }
+        }
     }
 }
