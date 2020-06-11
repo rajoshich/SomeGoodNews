@@ -5,27 +5,28 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:padding="12dp"
+    android:padding="@dimen/padding16"
     android:foreground="?selectableItemBackground">
 
     <ImageView
         android:id="@+id/ivArticleImage"
-        android:layout_width="160dp"
-        android:layout_height="140dp"
+        android:layout_width="@dimen/size160"
+        android:layout_height="@dimen/size140"
         android:src="@drawable/stock_photo"
         app:layout_constraintLeft_toLeftOf="parent"
         android:scaleType="centerCrop"
         tools:ignore="MissingConstraints"
-        android:elevation="20dp" />
+        android:elevation="@dimen/padding20"
+        android:contentDescription="@string/imgDescr"/>
 
     <TextView
         android:id="@+id/tvArticleHeadline"
-        android:layout_width="210dp"
+        android:layout_width="@dimen/size210"
         android:layout_height="wrap_content"
         tools:text="Some Headline that is long very very long"
         app:layout_constraintLeft_toRightOf="@id/ivArticleImage"
-        android:layout_marginLeft="16dp"
-        android:textSize="16sp"
+        android:layout_marginStart="@dimen/padding16"
+        android:textSize="@dimen/text16"
         android:textStyle="bold"
         android:fontFamily="sans-serif"
         android:textColor="@color/maxEmphGrey"
@@ -38,9 +39,9 @@
         tools:text="Source"
         app:layout_constraintLeft_toRightOf="@id/ivArticleImage"
         app:layout_constraintTop_toBottomOf="@id/tvArticleHeadline"
-        android:layout_marginBottom="5dp"
-        android:layout_marginLeft="16dp"
-        android:textSize="14sp"
+        android:layout_marginBottom="@dimen/padding5"
+        android:layout_marginStart="@dimen/padding16"
+        android:textSize="@dimen/text16"
         android:textColor="@color/lowEmphGrey"
         />
     <TextView
@@ -50,23 +51,22 @@
         tools:text="Category"
         app:layout_constraintLeft_toRightOf="@id/ivArticleImage"
        app:layout_constraintTop_toBottomOf="@id/tvArticleSource"
-        android:layout_marginLeft="16dp"
+        android:layout_marginStart="@dimen/padding16"
         android:textStyle="italic"
-        android:textSize="14sp"
+        android:textSize="@dimen/text16"
         />
 
     <Button
         android:id="@+id/ibLikeArticle"
-        android:layout_width="140dp"
-        android:layout_height="30dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="5dp"
+        android:layout_width="@dimen/size140"
+        android:layout_height="@dimen/size30"
+        android:layout_marginStart="@dimen/padding16"
+        android:layout_marginTop="@dimen/padding5"
         app:layout_constraintBottom_toBottomOf="@id/ivArticleImage"
         app:layout_constraintLeft_toRightOf="@id/ivArticleImage"
         android:background="@drawable/btn_rounded"
         android:textColor="@color/white"
-        android:textSize="12dp"
-
-        android:text="ADD TO LIKED"/>
+        android:textSize="@dimen/text12"
+        android:text="@string/add_to_liked"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

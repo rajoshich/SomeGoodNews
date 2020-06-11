@@ -9,6 +9,7 @@ import android.view.View.VISIBLE
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import com.example.somegoodnews.Fragments.*
 import com.example.somegoodnews.Listeners.*
 import com.example.somegoodnews.Managers.NewsArticle
@@ -83,14 +84,13 @@ class MainActivity : AppCompatActivity(),
         tabLayout.setupWithViewPager(viewPager)
         // bottom nav bar
         bottomNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
-
         // Immediately prompt user to log in
         replaceFragment(UserLoginFragment.getInstance(), UserLoginFragment.TAG)
     }
 
     override fun onUpdateList() {
-        // Gets the newsListFragment from the viewpager since there is no TAG
         try {
+            // Gets the newsListFragment from the viewpager since there is no TAG
             val newsListFragment = pageAdapter.instantiateItem(viewPager, viewPager.currentItem) as NewsListFragment
             newsListFragment.onUpdateList()
         } catch(e: Exception) {
@@ -105,6 +105,7 @@ class MainActivity : AppCompatActivity(),
         fragmentContainer.visibility = VISIBLE
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.fragmentContainer, fragment, tag)
+        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
         fragmentTransaction.commit()
     }
 
@@ -131,7 +132,6 @@ class MainActivity : AppCompatActivity(),
     }
 
     override fun updateLikesList() {
-//        app.dataManager.fetchLikedData(app.currentUser?.email.toString())
         val frag = supportFragmentManager.findFragmentByTag(LikedFragment.TAG) as? LikedFragment
         frag?.updateLiked()
     }

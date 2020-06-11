@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/ScrollView01"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:scrollbars="vertical"
@@ -11,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="@dimen/padding16">
 
         <!--Put form controls here-->
         <TextView
@@ -19,8 +18,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/submitTitle"
-            android:textSize="10pt"
-            android:padding="10dp"
+            android:textSize="@dimen/text20"
+            android:padding="@dimen/padding10"
             android:textColor="@color/colorPrimary"
             android:textAlignment="center">
         </TextView>
@@ -31,7 +30,8 @@
             android:inputType="textMultiLine"
             android:lines="3"
             android:layout_width="match_parent"
-            android:layout_marginTop="20dp">
+            android:layout_marginTop="@dimen/padding20"
+            android:autofillHints="@string/enter_headline">
         </EditText>
         <EditText
             android:id="@+id/etContent"
@@ -40,14 +40,15 @@
             android:inputType="textMultiLine"
             android:layout_width="match_parent"
             android:lines="10"
-            android:layout_marginTop="20dp">
+            android:layout_marginTop="@dimen/padding20"
+            android:autofillHints="@string/enter_content">
         </EditText>
         <Spinner
             android:id="@+id/category"
             android:layout_height="wrap_content"
             android:layout_width="fill_parent"
             android:entries="@array/categoriesList"
-            android:layout_marginTop="20dp">
+            android:layout_marginTop="@dimen/padding20">
         </Spinner>
         <EditText
             android:id="@+id/etImgLink"
@@ -55,16 +56,17 @@
             android:hint="@string/image_link"
             android:inputType="text"
             android:layout_width="match_parent"
-            android:layout_marginTop="20dp"/>
+            android:layout_marginTop="@dimen/padding20"
+            android:autofillHints="@string/image_link"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/submit_news_msg"
-            android:layout_marginTop="20dp"/>
+            android:layout_marginTop="@dimen/padding20"/>
         <CheckBox android:id="@+id/cbConfirm"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="@dimen/padding20"
             android:text="@string/submit_confirm"
             android:focusable="false"
             android:focusableInTouchMode="false"
@@ -74,7 +76,7 @@
             android:layout_height="wrap_content"
             android:text="@string/submitNews"
             android:layout_width="fill_parent"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="@dimen/padding20"
             android:background="@color/colorPrimary">
         </Button>
     </LinearLayout>

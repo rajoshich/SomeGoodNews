@@ -27,4 +27,19 @@
     <string name="image_link">Image Link</string>
     <string name="submitNews">Send Good vibes</string>
     <string name="submit_confirm">I confirm this news is wholesome</string>
+    <string name="share">Share</string>
+    <string name="logoDescr">SGN App Logo</string>
+    <string name="sign_in">Sign In</string>
+    <string name="create_account">Create Account</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="add_to_liked">ADD TO LIKED</string>
+    <string name="imgDescr">image provides context to headline</string>
+    <string name="your_liked_videos">Your Liked Videos</string>
+    <string name="categories">Categories</string>
+    <string name="humans_being_bros">Humans being bros</string>
+    <string name="aww">Aww</string>
+    <string name="covid_19">Covid-19</string>
+    <string name="other">Other</string>
 </resources>

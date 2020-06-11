@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="button_horizontal_margin">8dp</dimen>
+    <dimen name="title_bottom_margin">16dp</dimen>
+    <dimen name="icon_top_margin">24dp</dimen>
+    <dimen name="icon_bottom_margin">24dp</dimen>
+
+    <dimen name="padding5">5dp</dimen>
+    <dimen name="padding16">16dp</dimen>
+    <dimen name="padding10">10dp</dimen>
+    <dimen name="padding20">20dp</dimen>
+    <dimen name="newsArticleImgHeight">250dp</dimen>
+    <dimen name="catWidth">160dp</dimen>
+    <dimen name="catHeight">180dp</dimen>
+    <dimen name="size140">140dp</dimen>
+    <dimen name="size120">120dp</dimen>
+    <dimen name="text16">16sp</dimen>
+    <dimen name="text20">20sp</dimen>
+    <dimen name="size200">200dp</dimen>
+    <dimen name="size160">160dp</dimen>
+    <dimen name="size210">210dp</dimen>
+    <dimen name="size30">30dp</dimen>
+    <dimen name="text30">30sp</dimen>
+    <dimen name="text12">12sp</dimen>
+</resources>

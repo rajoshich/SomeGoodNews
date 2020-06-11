@@ -1,5 +1,6 @@
 package com.example.somegoodnews.Fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,6 +17,11 @@ class NewsArticleFragment: Fragment() {
         val TAG:String = "FULLNEWSARTICLE"
     }
     var clickedArticle: NewsArticle? = null
+    lateinit var app: SGNApp
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        app = (context?.applicationContext as SGNApp)
+    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -27,11 +33,24 @@ class NewsArticleFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         updateArticle()
-
+        btnShare.setOnClickListener {
+            clickedArticle = app.lastArticle
+            val text = "Checkout this wholesome article on the Some Good News App! \n" +
+                        clickedArticle?.headline + "\n" +
+                        "Here's the full article: \n" +
+                        clickedArticle?.content
+            val sendIntent: Intent = Intent().apply {
+                action = Intent.ACTION_SEND
+                putExtra(Intent.EXTRA_TEXT, text)
+                type = "text/plain"
+            }
+            val shareIntent = Intent.createChooser(sendIntent, "Some Good News")
+            startActivity(shareIntent)
+        }
     }
 
     fun updateArticle() {
-        clickedArticle = (context?.applicationContext as SGNApp).lastArticle
+        clickedArticle = app.lastArticle
         clickedArticle?.let{
             tvFullArticleHeadline.text = it.headline
             tvAuthor.text = it.source
