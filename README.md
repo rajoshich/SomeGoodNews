@@ -5,7 +5,7 @@ Which is why our team was inspired by [John Krasinski's YouTube show](https://ww
 and **aims to bring you only good news from around the world.**
 This is why our team was inspired by John Krasinski's YouTube show and aims to bring you only good news from around the world. This android application allows you to scroll through some wholesome news, save them for later or add your own to spread the love!:revolving_hearts:
 
-### Download the app [here](app\build\outputs\apk\debug\SomeGoodNews.apk)
+### Download the app [here](SomeGoodNews.apk)
 
 ## Screenshots
 ![](imgs/feature1.png)
