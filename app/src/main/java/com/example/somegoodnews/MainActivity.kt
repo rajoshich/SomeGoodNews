@@ -19,6 +19,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.item_article.*
 import kotlinx.android.synthetic.main.newsarticle_fragment.*
 import kotlinx.android.synthetic.main.tab_layout.*
+import java.lang.Exception
 
 
 class MainActivity : AppCompatActivity(),
@@ -89,8 +90,15 @@ class MainActivity : AppCompatActivity(),
 
     override fun onUpdateList() {
         // Gets the newsListFragment from the viewpager since there is no TAG
-        val newsListFragment = pageAdapter.instantiateItem(viewPager, viewPager.currentItem) as NewsListFragment
-        newsListFragment.onUpdateList()
+        try {
+            val newsListFragment = pageAdapter.instantiateItem(viewPager, viewPager.currentItem) as NewsListFragment
+            newsListFragment.onUpdateList()
+        } catch(e: Exception) {
+            // When the on the category fragment
+            tabLayout.getTabAt(0)?.select()
+            val newsListFragment = pageAdapter.instantiateItem(viewPager, viewPager.currentItem) as NewsListFragment
+            newsListFragment.onUpdateList()
+        }
     }
 
     private fun replaceFragment(fragment: Fragment, tag: String?) {
@@ -126,7 +134,6 @@ class MainActivity : AppCompatActivity(),
 //        app.dataManager.fetchLikedData(app.currentUser?.email.toString())
         val frag = supportFragmentManager.findFragmentByTag(LikedFragment.TAG) as? LikedFragment
         frag?.updateLiked()
-        Log.i("saashm", "main likes update")
     }
 
     private fun checkSignedIn(): Boolean {

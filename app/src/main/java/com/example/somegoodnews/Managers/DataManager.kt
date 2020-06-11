@@ -37,7 +37,6 @@ class DataManager {
                     articles = value.toMutableList()
                 }
                 onUpdateListListener?.onUpdateList()
-                Log.i("saashm", "All articles: " + articles)
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -72,13 +71,9 @@ class DataManager {
                             pos.forEach {
                                 liked.add(articles[it.toInt()])
                             }
-                        } else {
-                            Log.i("saashm", "List of articles is empty")
                         }
                         likedArticles = liked
                     }
-                    Log.i("saashm", "fetching likes for $user")
-                    Log.i("saashm", "Liked: " + likedArticles)
                     onUpdateLikes?.updateLikesList()
                     onUpdateListListener?.onUpdateList()
                 }
@@ -93,7 +88,7 @@ class DataManager {
     }
 
     fun likeArticle(newsArticle: NewsArticle, pos:Int, user: String, context: Context) {
-        if(!user.isNullOrEmpty()) {
+        if(user.isNotEmpty()) {
             database = Firebase.database
             fetchLikedData(user)
             // position of the article in main news list

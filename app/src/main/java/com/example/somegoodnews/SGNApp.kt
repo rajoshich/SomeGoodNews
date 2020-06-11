@@ -20,7 +20,6 @@ class SGNApp: Application() {
     }
 
     fun refreshData() {
-        Log.i("saashm", "Refreshing all data")
         currentUser = null
         lastArticle = null
         dataManager.likedArticlePos = mutableListOf()

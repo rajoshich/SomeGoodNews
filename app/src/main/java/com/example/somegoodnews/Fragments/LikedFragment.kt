@@ -2,7 +2,6 @@ package com.example.somegoodnews.Fragments
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,9 +11,7 @@ import com.example.somegoodnews.Listeners.OnUpdateListListener
 import com.example.somegoodnews.Managers.ArticlesAdapter
 import com.example.somegoodnews.R
 import com.example.somegoodnews.SGNApp
-import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.fragment_liked.*
-import kotlinx.android.synthetic.main.item_article.*
 
 class LikedFragment: Fragment() {
     lateinit var app: SGNApp
@@ -46,14 +43,12 @@ class LikedFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val articles = app.dataManager.likedArticles.toList()
-        Log.i("saashm","Likes fragment created")
         articlesAdapter = ArticlesAdapter(articles, context, TAG)
         rvLikedNewsList.adapter = articlesAdapter
     }
 
     fun updateLiked() {
         articlesAdapter.change(app.dataManager.likedArticles, null)
-        Log.i("saashm", "Update likes fragment called")
         // update the main list
         onUpdateListListener?.onUpdateList()
     }

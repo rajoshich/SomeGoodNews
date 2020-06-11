@@ -1,9 +1,7 @@
 package com.example.somegoodnews.Fragments
 
-import android.content.Context
 import android.os.Bundle
 import android.text.TextUtils
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
@@ -11,17 +9,11 @@ import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import com.example.somegoodnews.Listeners.OnUpdateLikes
-import com.example.somegoodnews.Listeners.OnUpdateListListener
 import com.example.somegoodnews.R
 import com.example.somegoodnews.SGNApp
 import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.sign_in_fragment.*
 
 class UserLoginFragment: Fragment() {
@@ -37,7 +29,6 @@ class UserLoginFragment: Fragment() {
         super.onCreate(savedInstanceState)
         auth = FirebaseAuth(FirebaseApp.getInstance())
         updateUser(auth.currentUser)
-        Log.i("saashm", "User login fragment created")
     }
 
     override fun onCreateView(
@@ -156,6 +147,5 @@ class UserLoginFragment: Fragment() {
         app.refreshData()
         app.currentUser = newUser
         app.dataManager.fetchLikedData(newUser?.email.toString())
-        Log.i("saashm", "New User " + newUser?.email)
     }
 }
