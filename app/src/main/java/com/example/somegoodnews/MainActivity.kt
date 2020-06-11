@@ -83,7 +83,6 @@ class MainActivity : AppCompatActivity(),
         tabLayout.setupWithViewPager(viewPager)
         // bottom nav bar
         bottomNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
-
         // Immediately prompt user to log in
         replaceFragment(UserLoginFragment.getInstance(), UserLoginFragment.TAG)
     }

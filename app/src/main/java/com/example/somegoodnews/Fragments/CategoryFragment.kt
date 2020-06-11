@@ -28,15 +28,12 @@ class CategoryFragment : Fragment() {
         category1.setOnClickListener {
             updateFrag("Humans being bros")
         }
-
         category2.setOnClickListener {
             updateFrag("Aww")
         }
-
         category3.setOnClickListener {
             updateFrag("Covid-19")
         }
-
         category4.setOnClickListener {
             updateFrag("Other")
         }
