@@ -10,24 +10,24 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="@dimen/padding16">
 
         <!--Put form controls here-->
         <TextView
             android:id="@+id/TextViewTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"
+            android:padding="@dimen/padding10"
             android:text="@string/submitTitle"
             android:textAlignment="center"
             android:textColor="@color/colorPrimary"
-            android:textSize="10pt" />
+            android:textSize="@dimen/text20" />
 
         <EditText
             android:id="@+id/etHeadline"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="@dimen/padding20"
             android:hint="@string/enter_headline"
             android:inputType="textMultiLine"
             android:gravity="bottom"
@@ -37,7 +37,7 @@
             android:id="@+id/etContent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="@dimen/padding20"
             android:hint="@string/enter_content"
             android:gravity="bottom"
             android:inputType="textMultiLine"
@@ -47,29 +47,29 @@
             android:id="@+id/category"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="@dimen/padding20"
             android:entries="@array/categoriesList" />
 
         <EditText
             android:id="@+id/etImgLink"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="@dimen/padding20"
             android:hint="@string/image_link"
             android:inputType="text" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="@dimen/padding20"
             android:text="@string/submit_news_msg" />
 
         <CheckBox
             android:id="@+id/cbConfirm"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:buttonTint="#191919"
+            android:layout_marginTop="@dimen/padding20"
+            android:buttonTint="@color/blackishTint"
             android:focusable="false"
             android:focusableInTouchMode="false"
             android:text="@string/submit_confirm" />
@@ -78,7 +78,7 @@
             android:id="@+id/btnSubmitNews"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="@dimen/padding20"
             android:background="@color/colorPrimary"
             android:text="@string/submitNews" />
     </LinearLayout>

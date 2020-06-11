@@ -9,4 +9,5 @@
     <color name="maxEmphGrey">#666666</color>
     <color name="medEmphGrey">#999999</color>
     <color name="lowEmphGrey">#BBBBBB</color>
+    <color name="blackishTint">#191919</color>
 </resources>

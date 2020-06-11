@@ -9,14 +9,10 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import com.example.somegoodnews.Managers.NewsArticle
-
 import com.example.somegoodnews.R
 import com.example.somegoodnews.SGNApp
-import com.google.firebase.database.ktx.database
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_submit_news.*
 import java.time.LocalDate
-import java.time.LocalDateTime
 
 class SubmitNewsFragment : Fragment() {
 
