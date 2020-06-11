@@ -6,6 +6,8 @@ import android.text.TextUtils
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -25,7 +27,6 @@ import kotlinx.android.synthetic.main.sign_in_fragment.*
 class UserLoginFragment: Fragment() {
     private lateinit var auth: FirebaseAuth
     var currentUser: FirebaseUser? = null
-    var onUpdateLikes: OnUpdateLikes? = null
     companion object {
         var TAG: String = "USERLOGINFRAG"
         fun getInstance(): UserLoginFragment {
@@ -75,12 +76,7 @@ class UserLoginFragment: Fragment() {
                     // Sign in success, update UI with the signed-in user's information
                     updateUser(auth.currentUser)
                     updateUI(currentUser)
-                    // redirect to newslist
-                    val fragmentManager: FragmentManager = activity!!.supportFragmentManager
-                    val fragmentTransaction = fragmentManager.beginTransaction()
-                    fragmentTransaction.replace(R.id.main_layout, NewsListFragment(), NewsListFragment.TAG)
-                    fragmentTransaction.addToBackStack(NewsListFragment.TAG)
-                    fragmentTransaction.commit()
+                   view?.visibility = GONE
                 } else {
                     // If sign in fails, display a message to the user.
                     Toast.makeText(context, "Authentication failed.",
@@ -141,15 +137,15 @@ class UserLoginFragment: Fragment() {
         if (user != null) {
             status.text = getString(R.string.emailpassword_status_fmt,
                 user.email)
-            emailPasswordButtons.visibility = View.GONE
-            emailPasswordFields.visibility = View.GONE
-            signedInButtons.visibility = View.VISIBLE
+            emailPasswordButtons.visibility = GONE
+            emailPasswordFields.visibility = GONE
+            signedInButtons.visibility = VISIBLE
         } else {
             status.text = getString(R.string.signed_out)
-            emailPasswordButtons.visibility = View.VISIBLE
-            emailPasswordFields.visibility = View.VISIBLE
-            signedInButtons.visibility = View.GONE
-            view?.visibility = View.VISIBLE
+            emailPasswordButtons.visibility = VISIBLE
+            emailPasswordFields.visibility = VISIBLE
+            signedInButtons.visibility = GONE
+            view?.visibility = VISIBLE
         }
     }
 
