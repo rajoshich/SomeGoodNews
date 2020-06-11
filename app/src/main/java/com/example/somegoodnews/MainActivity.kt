@@ -148,4 +148,11 @@ class MainActivity : AppCompatActivity(),
         }
         return currentUser == null
     }
+
+    override fun onBackPressed() {
+        if(fragmentContainer.visibility == GONE) {
+            super.onBackPressed()
+        }
+        fragmentContainer.visibility = GONE
+    }
 }
