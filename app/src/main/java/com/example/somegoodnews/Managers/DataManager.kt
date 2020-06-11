@@ -80,6 +80,7 @@ class DataManager {
                     Log.i("saashm", "fetching likes for $user")
                     Log.i("saashm", "Liked: " + likedArticles)
                     onUpdateLikes?.updateLikesList()
+                    onUpdateListListener?.onUpdateList()
                 }
 
                 override fun onCancelled(error: DatabaseError) {

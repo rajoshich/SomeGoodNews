@@ -45,15 +45,10 @@ class LikedFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        var userEmail = app.currentUser?.email.toString()
-        app.dataManager.fetchLikedData(userEmail)
         val articles = app.dataManager.likedArticles.toList()
-        if(articles != null) {
-            articlesAdapter = ArticlesAdapter(articles, context, TAG)
-            rvLikedNewsList.adapter = articlesAdapter
-        } else {
-            likedText.text = getString(R.string.no_liked)
-        }
+        Log.i("saashm","Likes fragment created")
+        articlesAdapter = ArticlesAdapter(articles, context, TAG)
+        rvLikedNewsList.adapter = articlesAdapter
     }
 
     fun updateLiked() {

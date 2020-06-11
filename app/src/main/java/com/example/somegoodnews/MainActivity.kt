@@ -85,9 +85,6 @@ class MainActivity : AppCompatActivity(),
 
         // Immediately prompt user to log in
         replaceFragment(UserLoginFragment.getInstance(), UserLoginFragment.TAG)
-        if(app.currentUser != null) {
-            fragmentContainer.visibility = GONE
-        }
     }
 
     override fun onUpdateList() {

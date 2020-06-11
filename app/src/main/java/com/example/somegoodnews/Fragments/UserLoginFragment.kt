@@ -159,9 +159,7 @@ class UserLoginFragment: Fragment() {
         val app = (context?.applicationContext as SGNApp)
         app.refreshData()
         app.currentUser = newUser
+        app.dataManager.fetchLikedData(newUser?.email.toString())
         Log.i("saashm", "New User " + newUser?.email)
-        // Trigger other info update
-        onUpdateLikes?.updateLikesList()
-
     }
 }
