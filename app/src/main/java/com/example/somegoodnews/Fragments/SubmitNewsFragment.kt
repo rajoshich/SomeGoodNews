@@ -38,21 +38,25 @@ class SubmitNewsFragment : Fragment() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun submitNews() {
-        var imgLink = etImgLink.text.toString()
-        if(imgLink.isEmpty()) {
-            imgLink = "https://images.pexels.com/photos/3944463/pexels-photo-3944463.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+        if(!cbConfirm.isChecked) {
+            Toast.makeText(context, "You must confirm this is wholesome news", Toast.LENGTH_SHORT).show()
+        } else {
+            var imgLink = etImgLink.text.toString()
+            if(imgLink.isEmpty()) {
+                imgLink = "https://images.pexels.com/photos/3944463/pexels-photo-3944463.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+            }
+            val app = (context?.applicationContext as SGNApp)
+            val user = app.currentUser?.email.toString()
+            val newArticle = NewsArticle(
+                category.selectedItem.toString(),
+                etHeadline.text.toString(),
+                etContent.text.toString(),
+                imgLink,
+                LocalDate.now().toString(),
+                user)
+            app.dataManager.addArticle(newArticle, user)
+            Toast.makeText(context, "Good vibes sent!", Toast.LENGTH_SHORT).show()
         }
-        val app = (context?.applicationContext as SGNApp)
-        val user = app.currentUser?.email.toString()
-        val newArticle = NewsArticle(
-                                    category.selectedItem.toString(),
-                                    etHeadline.text.toString(),
-                                    etContent.text.toString(),
-                                    imgLink,
-                                    LocalDate.now().toString(),
-                                    user)
-        app.dataManager.addArticle(newArticle, user)
-        Toast.makeText(context, "Good vibes sent!", Toast.LENGTH_SHORT).show()
     }
 
     companion object {

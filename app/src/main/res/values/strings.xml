@@ -12,7 +12,9 @@
         in placerat risus semper.Nulla ultrices ornare metus, vel vulputate augue auctor vel. Sed dignissim dignissim rutrum.
         Morbi magna ex, rutrum et dolor a, gravida accumsan augue. tur.
     </string>
-
+    <string name="submit_news_msg">To uphold the purpose and ethos behind this application
+        please only submit news that have positive vibes. Thank you! - SGN App Team :)
+    </string>
     <string name="no_liked">You have no liked articles</string>
     <string name="feedbacktype1">Humans Being Bros</string>
     <string name="feedbacktype2">COVID-19</string>
@@ -24,4 +26,5 @@
     <string name="enter_content">Enter Content</string>
     <string name="image_link">Image Link</string>
     <string name="submitNews">Send Good vibes</string>
+    <string name="submit_confirm">I confirm this news is wholesome</string>
 </resources>

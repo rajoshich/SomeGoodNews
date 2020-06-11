@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:scrollbars="vertical"
     android:background="@color/white">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -20,8 +21,7 @@
             android:text="@string/submitTitle"
             android:textSize="10pt"
             android:padding="10dp"
-            android:background="@color/colorPrimary"
-            android:textColor="@color/black"
+            android:textColor="@color/colorPrimary"
             android:textAlignment="center">
         </TextView>
         <EditText
@@ -56,12 +56,26 @@
             android:inputType="text"
             android:layout_width="match_parent"
             android:layout_marginTop="20dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/submit_news_msg"
+            android:layout_marginTop="20dp"/>
+        <CheckBox android:id="@+id/cbConfirm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/submit_confirm"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            />
         <Button
             android:id="@+id/btnSubmitNews"
             android:layout_height="wrap_content"
             android:text="@string/submitNews"
             android:layout_width="fill_parent"
-            android:layout_marginTop="20dp">
+            android:layout_marginTop="20dp"
+            android:background="@color/colorPrimary">
         </Button>
     </LinearLayout>
 </ScrollView>
