@@ -5,8 +5,6 @@ Which is why our team was inspired by [John Krasinski's YouTube show](https://ww
 and **aims to bring you only good news from around the world.** 
 This is why our team was inspired by John Krasinski's YouTube show and aims to bring you only good news from around the world. This android application allows you to scroll through some wholesome news, save them for later or add your own to spread the love!:revolving_hearts:
 
-## Screenshots
-
 ## Features
 - Scroll through some wholesome news
 - Scroll through news by category
@@ -24,6 +22,8 @@ This is why our team was inspired by John Krasinski's YouTube show and aims to b
 - Receive daily notifications about the top news
 - Sort news by "wholesome-ness"
 - Review process to prevent un-wholesome news
+- Use View Model to clean up code
+- Add responsive animations
 
 ## Frameworks used
 - Firebase
