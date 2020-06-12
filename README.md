@@ -23,10 +23,10 @@ This android application allows you to scroll through some wholesome news, 'like
 - Share wholesome stories from **SomeGoodNews** to external social media sites or messages
 
 ## Contributors
-- :man: [ @shrayarora8](https://github.com/shrayarora8)
-- :man: [ @ashmannsygle](https://github.com/ashmannsyngle)
-- :woman: [ @rajoshich](https://github.com/rajoshich)
-- :woman: [ @saashamoruw](https://github.com/saashamoruw)
+- :man: &nbsp;[@shrayarora8](https://github.com/shrayarora8)
+- :man: &nbsp;[@ashmannsygle](https://github.com/ashmannsyngle)
+- :woman: &nbsp;[@rajoshich](https://github.com/rajoshich)
+- :woman: &nbsp;[@saashamoruw](https://github.com/saashamoruw)
 - :purple_heart: &nbsp; Special shoutout to [Eric Chee](https://github.com/echeeUW) for being an amazing instructor
 
 ## Upcoming features
